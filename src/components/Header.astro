@@ -1,0 +1,180 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="hero" role="banner">
+  <ThemeToggle />
+
+  <div class="hero-inner">
+    <svg
+      class="hero-graphic"
+      viewBox="0 0 320 240"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-labelledby="hero-illustration-title hero-illustration-desc"
+      role="img"
+    >
+      <title id="hero-illustration-title">Offline Security</title>
+      <desc id="hero-illustration-desc">
+        Abstract geometric illustration representing secure, local-first authentication with interconnected nodes forming a protected vault
+      </desc>
+
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path
+            d="M 20 0 L 0 0 0 20"
+            fill="none"
+            stroke="#1c2128"
+            stroke-width="0.5"
+          />
+        </pattern>
+        <linearGradient
+          id="shieldGrad"
+          x1="160"
+          y1="40"
+          x2="160"
+          y2="200"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.15" />
+          <stop offset="100%" stop-color="#58a6ff" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="nodeGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#388bfd" />
+          <stop offset="100%" stop-color="#1f6feb" />
+        </linearGradient>
+      </defs>
+
+      <rect width="320" height="240" fill="url(#grid)" opacity="0.5" />
+
+      <path
+        d="M160 45 L220 75 L220 140 C220 175 195 200 160 210 C125 200 100 175 100 140 L100 75 Z"
+        fill="url(#shieldGrad)"
+        stroke="#30363d"
+        stroke-width="1"
+      />
+
+      <path
+        d="M160 80 L190 97 L190 131 L160 148 L130 131 L130 97 Z"
+        fill="none"
+        stroke="#58a6ff"
+        stroke-width="1.5"
+        stroke-opacity="0.6"
+      />
+
+      <circle
+        cx="160"
+        cy="108"
+        r="8"
+        fill="#0a0e14"
+        stroke="#58a6ff"
+        stroke-width="1.5"
+      />
+      <rect
+        x="156"
+        y="112"
+        width="8"
+        height="14"
+        rx="2"
+        fill="#0a0e14"
+        stroke="#58a6ff"
+        stroke-width="1.5"
+      />
+
+      <g opacity="0.7">
+        <circle cx="60" cy="90" r="4" fill="url(#nodeGrad)" />
+        <circle cx="45" cy="120" r="3" fill="#388bfd" opacity="0.6" />
+        <circle cx="70" cy="145" r="3.5" fill="#388bfd" opacity="0.8" />
+        <line
+          x1="60"
+          y1="90"
+          x2="100"
+          y2="105"
+          stroke="#30363d"
+          stroke-width="1"
+        />
+        <line
+          x1="45"
+          y1="120"
+          x2="100"
+          y2="120"
+          stroke="#30363d"
+          stroke-width="1"
+        />
+        <line
+          x1="70"
+          y1="145"
+          x2="100"
+          y2="135"
+          stroke="#30363d"
+          stroke-width="1"
+        />
+
+        <circle cx="260" cy="90" r="4" fill="url(#nodeGrad)" />
+        <circle cx="275" cy="120" r="3" fill="#388bfd" opacity="0.6" />
+        <circle cx="250" cy="145" r="3.5" fill="#388bfd" opacity="0.8" />
+        <line
+          x1="260"
+          y1="90"
+          x2="220"
+          y2="105"
+          stroke="#30363d"
+          stroke-width="1"
+        />
+        <line
+          x1="275"
+          y1="120"
+          x2="220"
+          y2="120"
+          stroke="#30363d"
+          stroke-width="1"
+        />
+        <line
+          x1="250"
+          y1="145"
+          x2="220"
+          y2="135"
+          stroke="#30363d"
+          stroke-width="1"
+        />
+      </g>
+
+      <g opacity="0.5">
+        <circle cx="140" cy="185" r="2.5" fill="#58a6ff" />
+        <circle cx="152" cy="185" r="2.5" fill="#58a6ff" opacity="0.6" />
+        <circle cx="164" cy="185" r="2.5" fill="#58a6ff" opacity="0.4" />
+        <circle cx="176" cy="185" r="2.5" fill="#58a6ff" opacity="0.2" />
+      </g>
+
+      <circle
+        cx="160"
+        cy="120"
+        r="95"
+        fill="none"
+        stroke="#21262d"
+        stroke-width="1"
+        stroke-dasharray="4 8"
+      />
+    </svg>
+
+    <h1 class="hero-title">desktop-2fa</h1>
+    <p class="hero-tagline">Own your keys. Own your codes.</p>
+    <p class="hero-subheading">
+      An offline TOTP authenticator built on open standards—transparent, auditable, no cloud sync.
+    </p>
+
+    <nav class="hero-actions" aria-label="Primary actions">
+      <a href="#install" class="btn btn-primary">Install</a>
+      <a
+        href="https://github.com/wrogistefan/desktop-2fa"
+        class="btn btn-secondary"
+      >
+        View Source
+      </a>
+    </nav>
+
+    <div class="install-snippet" aria-label="Installation command">
+      <code>pip install desktop-2fa</code>
+    </div>
+  </div>
+</header>

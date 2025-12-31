@@ -1,0 +1,177 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>desktop‑2fa — Offline TOTP Manager</title>
+    <meta
+      name="description"
+      content="desktop-2fa: An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable."
+    />
+    <meta
+      name="keywords"
+      content="offline TOTP manager, open source authenticator, local 2FA, desktop TOTP, CLI authenticator, privacy tools, developer security, offline 2FA, open standards"
+    />
+    <meta name="author" content="Łukasz Perek" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      property="og:title"
+      content="desktop-2fa — Offline TOTP Manager"
+    />
+    <meta
+      property="og:description"
+      content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.svg" />
+    <meta property="og:url" content="https://desktop-2fa.example.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="desktop-2fa — Offline TOTP Manager"
+    />
+    <meta
+      name="twitter:description"
+      content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable."
+    />
+    <meta name="twitter:image" content="/og-image.svg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://desktop-2fa.example.com/" />
+  </head>
+  <body>
+    <div class="page">
+      <main class="page-main">
+        <Header />
+
+        <div class="container">
+          <section aria-labelledby="features-heading">
+            <h2 id="features-heading">Features</h2>
+            <div class="features-grid">
+              <article class="feature">
+                <h3 class="feature-title">Offline, Local-First</h3>
+                <p class="feature-desc">
+                  No network required. Secrets never leave your machine.
+                </p>
+              </article>
+              <article class="feature">
+                <h3 class="feature-title">Encrypted Vault</h3>
+                <p class="feature-desc">
+                  AES-256-GCM encryption with Argon2 key derivation.
+                </p>
+              </article>
+              <article class="feature">
+                <h3 class="feature-title">Open Standards</h3>
+                <p class="feature-desc">
+                  Transparent code. Every line is readable and auditable.
+                </p>
+              </article>
+              <article class="feature">
+                <h3 class="feature-title">CLI-First Workflow</h3>
+                <p class="feature-desc">
+                  Designed for terminal users and automation scripts.
+                </p>
+              </article>
+              <article class="feature">
+                <h3 class="feature-title">Reproducible, Auditable</h3>
+                <p class="feature-desc">
+                  100% test coverage. Deterministic builds.
+                </p>
+              </article>
+              <article class="feature">
+                <h3 class="feature-title">No Cloud, No Telemetry</h3>
+                <p class="feature-desc">
+                  Zero tracking. Zero data collection. Zero exceptions.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section id="install" aria-labelledby="install-heading">
+            <h2 id="install-heading">Install</h2>
+            <p>Install from PyPI:</p>
+            <pre><code>pip install desktop-2fa</code></pre>
+            <p>Basic usage:</p>
+            <pre><code># Add a TOTP entry
+desktop-2fa add
+
+# Generate a code
+desktop-2fa code &lt;account&gt;
+
+# List all entries
+desktop-2fa list</code></pre>
+          </section>
+
+          <section aria-labelledby="roadmap-heading">
+            <h2 id="roadmap-heading">Roadmap</h2>
+            <ul>
+              <li>Import from popular authenticator formats (Aegis, etc.)</li>
+              <li>GUI interface</li>
+              <li>HOTP support</li>
+              <li>QR code import</li>
+              <li>Rust backend</li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="support-heading">
+            <h2 id="support-heading">Support the Project</h2>
+            <p>
+              desktop‑2fa is an independent open‑source tool built with a focus
+              on autonomy, transparency, and offline security. If you find it
+              useful and want to support ongoing development, you can do so
+              through the platforms below.
+            </p>
+
+            <div class="features-grid">
+              <article class="feature">
+                <h3 class="feature-title">Ko‑fi</h3>
+                <p class="feature-desc">One‑time or recurring support.</p>
+                <p>
+                  <a
+                    href="https://ko-fi.com/lukaszperek"
+                    target="_blank"
+                    rel="noopener"
+                    >ko-fi.com/lukaszperek</a
+                  >
+                </p>
+              </article>
+
+              <article class="feature">
+                <h3 class="feature-title">Buy Me a Coffee</h3>
+                <p class="feature-desc">
+                  Simple way to support the project.
+                </p>
+                <p>
+                  <a
+                    href="https://buymeacoffee.com/lukaszperek"
+                    target="_blank"
+                    rel="noopener"
+                    >buymeacoffee.com/lukaszperek</a
+                  >
+                </p>
+              </article>
+
+              <article class="feature">
+                <h3 class="feature-title">AirTM</h3>
+                <p class="feature-desc">Direct support via AirTM.</p>
+                <p>
+                  <a
+                    href="https://airtm.me/lukper"
+                    target="_blank"
+                    rel="noopener"
+                    >airtm.me/lukper</a
+                  >
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <Footer />
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

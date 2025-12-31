@@ -1,0 +1,77 @@
+---
+const label = "Toggle theme";
+---
+
+<div class="theme-toggle" aria-label={label}>
+  <button
+    class="theme-toggle-button"
+    type="button"
+    id="theme-toggle-button"
+  >
+    <span id="theme-toggle-icon">🌓</span>
+    <span id="theme-toggle-text">Auto</span>
+  </button>
+
+  <script>
+    const STORAGE_KEY = 'desktop2fa-theme';
+
+    function getSystemPreference() {
+      return window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    }
+
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      const btnText = document.getElementById('theme-toggle-text');
+      const btnIcon = document.getElementById('theme-toggle-icon');
+
+      if (!root || !btnText || !btnIcon) return;
+
+      if (theme === 'light') {
+        root.dataset.theme = 'light';
+        btnText.textContent = 'Light';
+        btnIcon.textContent = '☀️';
+      } else if (theme === 'dark') {
+        root.dataset.theme = 'dark';
+        btnText.textContent = 'Dark';
+        btnIcon.textContent = '🌙';
+      } else {
+        root.removeAttribute('data-theme');
+        btnText.textContent = 'Auto';
+        btnIcon.textContent = '🌓';
+      }
+    }
+
+    function initTheme() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'light' || stored === 'dark' || stored === 'auto') {
+        applyTheme(stored);
+      } else {
+        applyTheme('auto');
+      }
+    }
+
+    function nextTheme(current) {
+      if (current === 'auto') return 'light';
+      if (current === 'light') return 'dark';
+      return 'auto';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+
+      const btn = document.getElementById('theme-toggle-button');
+      if (!btn) return;
+
+      btn.addEventListener('click', () => {
+        const current =
+          localStorage.getItem(STORAGE_KEY) ?? 'auto';
+        const next = nextTheme(current);
+        localStorage.setItem(STORAGE_KEY, next);
+        applyTheme(next);
+      });
+    });
+  </script>
+</div>
