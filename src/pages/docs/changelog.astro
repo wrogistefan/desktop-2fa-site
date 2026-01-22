@@ -1,0 +1,495 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Changelog">
+  <div>
+
+    <a href="/docs" class="back-link">
+      ← Back to documentation
+    </a>
+
+    <h1>Changelog</h1>
+
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a> and this project adheres to <a href="https://semver.org/">Semantic Versioning</a>.</p>
+
+<div class="my-6"></div>
+
+<h3 id="073-def-02-permissiondenied-fix">[0.7.3] — DEF-02 PermissionDenied Fix</h3>
+
+<h4>Fixed</h4>
+<p><strong>DEF-02: PermissionDenied Not Caught During Vault Creation (HIGH)</strong></p>
+
+<p>When creating a new vault (when vault file doesn't exist), the CLI would attempt to save the vault file. If the directory was not writable, <code>vault.save()</code> raised <code>PermissionDenied</code>, but this exception was NOT caught in the "create new vault" paths, resulting in a full Python traceback.</p>
+
+<ul>
+  <li>Added <code>try/except PermissionDenied</code> blocks around all <code>vault.save()</code> calls in vault creation paths</li>
+  <li>Functions fixed:
+    <ul>
+      <li><code>add_entry_interactive()</code></li>
+      <li><code>list_entries()</code> (both vault creation paths)</li>
+      <li><code>add_entry()</code> (both vault creation paths)</li>
+      <li><code>init_vault()</code> (already had the fix)</li>
+    </ul>
+  </li>
+  <li>Users now see: <code>Cannot access vault directory (permission denied).</code> instead of a traceback</li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Updated CHANGELOG with DEF-02 fix details</li>
+  <li>Updated version to 0.7.3</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="072-security-reliability-patch">[0.7.2] — Security & Reliability Patch</h3>
+
+<h4>Security Fixes</h4>
+
+<p><strong>DEF-01: Empty Password Hard-Rejection (CRITICAL)</strong></p>
+
+<ul>
+  <li>Empty passwords are now immediately rejected with a clear error message</li>
+  <li>Added validation in <code>get_password_for_vault()</code></li>
+  <li>Error message: <code>Password cannot be empty.</code></li>
+  <li>Applies to all password input methods</li>
+</ul>
+
+<p><strong>DEF-02: PermissionError Handling (HIGH)</strong></p>
+
+<ul>
+  <li>Permission errors now properly distinguished from missing vault files</li>
+  <li>Added <code>PermissionDenied</code> and <code>VaultNotFound</code> exceptions</li>
+  <li><code>Vault.load()</code> now distinguishes <code>FileNotFoundError</code> vs <code>PermissionError</code></li>
+  <li>CLI no longer prompts for password on permission errors</li>
+  <li>User sees: <code>Error: Cannot access vault directory (permission denied).</code></li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Updated RELEASE_NOTES.md</li>
+  <li>Updated README.md</li>
+  <li>Added password validation rules</li>
+  <li>Added permission denied documentation</li>
+</ul>
+
+<h4>Testing</h4>
+<ul>
+  <li>Updated <code>test_vault_load_file_not_found</code></li>
+  <li>All 187 tests pass</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="071-security-patch">[0.7.1] — Security Patch</h3>
+
+<h4>Security Hardening</h4>
+<ul>
+  <li>Fixed CodeQL-reported sensitive output issue</li>
+  <li>Improved sanitization of CLI output</li>
+  <li>No functional changes</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="070-vault-semantics-deterministic-ux">[0.7.0] — Vault Semantics & Deterministic UX</h3>
+
+<h4>New Features</h4>
+<ul>
+  <li>Explicit vault initialization</li>
+  <li>Deterministic vault creation messages</li>
+  <li>Rename safety with duplicate detection</li>
+</ul>
+
+<h4>Security & UX Improvements</h4>
+<ul>
+  <li>Removed silent vault creation</li>
+  <li>Vault creation always prints path</li>
+  <li>Rename aborts on duplicates</li>
+  <li>Invalid password exits cleanly</li>
+</ul>
+
+<h4>Fixed</h4>
+<ul>
+  <li>#9: Rename aborts on duplicates</li>
+  <li>#5: Explicit vault initialization</li>
+</ul>
+
+<h4>Testing</h4>
+<ul>
+  <li>Added rename regression tests</li>
+  <li>Added vault lifecycle tests</li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Added Vault Lifecycle section</li>
+  <li>Documented duplicate handling</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="0662-security-fix">[0.6.6.2] — Security Fix</h3>
+
+<ul>
+  <li>Fixed CodeQL-reported sensitive info leak in password file errors</li>
+  <li>Removed password file path from error messages</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="0661">[0.6.6.1] — 2026-01-05</h3>
+
+<div class="my-6"></div>
+
+<h3 id="066">[0.6.6] — 2026-01-05</h3>
+
+<h4>Fixed</h4>
+<ul>
+  <li>Non-interactive <code>d2fa list --password</code> no longer creates vault silently</li>
+  <li>"Vault created." always printed</li>
+  <li>Added UX contract rule: all state-mutating operations must emit confirmation messages</li>
+</ul>
+
+<h4>Testing</h4>
+<ul>
+  <li>Added regression tests for non-interactive vault creation</li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Updated docs/ux.md</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="065">[0.6.5] — 2026-01-04</h3>
+
+<h4>Vault Entry Identification</h4>
+<ul>
+  <li>Established <code>account_name</code> as unique identifier</li>
+  <li>Implemented <code>d2fa rename</code></li>
+  <li>Added duplicate detection</li>
+</ul>
+
+<h4>Security Cleanup</h4>
+<ul>
+  <li>Removed unlock timeout</li>
+  <li>Enforced stateless design</li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Updated user manual</li>
+  <li>Documented rename command</li>
+</ul>
+
+<h4>CI Improvements</h4>
+<ul>
+  <li>Added full matrix CI</li>
+  <li>Added macOS Qt6 job</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="064">[0.6.4] — 2026-01-04</h3>
+
+<h4>CLI Output Standardization</h4>
+<ul>
+  <li>Fixed Rich markup in prompts</li>
+  <li>Standardized colored output</li>
+  <li>Added regression test</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="0631">[0.6.3.1] — 2026-01-04</h3>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Updated password handling documentation</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="063">[0.6.3] — 2026-01-04</h3>
+
+<h4>Security Hardening</h4>
+<ul>
+  <li>Ensured <code>.vault-unlocked</code> contains only timestamp</li>
+  <li>Password required even during unlock timeout</li>
+</ul>
+
+<h4>New Features</h4>
+<ul>
+  <li>Improved interactive <code>d2fa add</code></li>
+  <li>Password strength enforcement</li>
+  <li>Bypass flags for weak passwords</li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Updated user manual</li>
+</ul>
+
+<h4>Fixed</h4>
+<ul>
+  <li>MyPy errors</li>
+  <li>Formatting issues</li>
+</ul>
+
+<h4>Testing</h4>
+<ul>
+  <li>All tests pass</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="062">[0.6.2] — 2026-01-03</h3>
+
+<h4>Fixed</h4>
+<ul>
+  <li>CI workflow issues</li>
+  <li>Test failures</li>
+</ul>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Added vault incompatibility warnings</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="061">[0.6.1] — 2026-01-03</h3>
+
+<h4>Documentation</h4>
+<ul>
+  <li>Added vault incompatibility warnings</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="060">[0.6.0] — 2026-01-03</h3>
+
+<h4>Security Audit Completion</h4>
+<ul>
+  <li>Completed cryptography audit</li>
+  <li>Updated Argon2id parameters</li>
+  <li>Validated AES-GCM usage</li>
+</ul>
+
+<h4>Vault Format Breaking Change</h4>
+<p>Vaults created before 0.6.0 are not compatible.</p>
+
+<p>Older vaults lacked:</p>
+<ul>
+  <li>version field</li>
+  <li>magic header</li>
+  <li>audited Argon2id parameters</li>
+  <li>stable ciphertext layout</li>
+</ul>
+
+<p>Users must create a new vault using <code>d2fa init-vault</code>.</p>
+
+<h4>Fixed</h4>
+<ul>
+  <li>CI workflow issues</li>
+  <li>Test failure in <code>test_cli_import</code></li>
+</ul>
+
+<h4>Quality Improvements</h4>
+<ul>
+  <li>Added full security test matrix</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="056">[0.5.6] — 2026-01-01</h3>
+
+<h4>Maintenance</h4>
+<ul>
+  <li>Synced version with PyPI</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="0552">[0.5.5.2] — 2026-01-01</h3>
+
+<h4>Quality Improvements</h4>
+<ul>
+  <li>Clarified test coverage</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="0551">[0.5.5.1] — 2026-01-01</h3>
+
+<h4>Fixed</h4>
+<ul>
+  <li><code>Vault.load()</code> now creates empty vault if missing</li>
+</ul>
+
+<h4>Notes</h4>
+<ul>
+  <li>Introduces side-effect in <code>load()</code></li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="055">[0.5.5] — 2025-12-31</h3>
+
+<h4>Security Enhancements</h4>
+<ul>
+  <li>Implemented secure vault password system</li>
+  <li>Added password flags</li>
+</ul>
+
+<h4>Added</h4>
+<ul>
+  <li>Importers for Aegis, Bitwarden, 1Password, otpauth, FreeOTP</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="054">[0.5.4] — 2025-12-30</h3>
+
+<h4>Quality Improvements</h4>
+<ul>
+  <li>Achieved 100% test coverage</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="053">[0.5.3] — 2025-12-30</h3>
+
+<h4>Security & Validation Improvements</h4>
+<ul>
+  <li>Added input validation for <code>add</code></li>
+</ul>
+
+<h4>Added</h4>
+<ul>
+  <li>Python 3.13 support</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="051">[0.5.1] — 2025-12-30</h3>
+
+<h4>CLI Enhancements</h4>
+<ul>
+  <li>Added <code>--version</code></li>
+  <li>Made <code>add</code> interactive</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="050">[0.5.0] — 2025-12-30</h3>
+
+<h4>Major Changes</h4>
+<ul>
+  <li>Migrated vault to Pydantic v2</li>
+</ul>
+
+<h4>Vault Improvements</h4>
+<ul>
+  <li>Introduced <code>TotpEntry</code> and <code>VaultData</code></li>
+</ul>
+
+<h4>CLI Updates</h4>
+<ul>
+  <li>Renamed <code>generate</code> to <code>code</code></li>
+</ul>
+
+<h4>Breaking Changes</h4>
+<ul>
+  <li>Vault format changed</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="041">[0.4.1] — 2025-12-29</h3>
+
+<h4>Improved</h4>
+<ul>
+  <li>Added missing docstrings</li>
+  <li>Standardized documentation</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="040">[0.4.0] — 2025-12-28</h3>
+
+<h4>Vault Encryption Overhaul</h4>
+<ul>
+  <li>Migrated to AES-GCM + Argon2</li>
+</ul>
+
+<h4>Full CLI Test Coverage</h4>
+<ul>
+  <li>Added complete test suite</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="030">[0.3.0] — 2025-12-28</h3>
+
+<h4>Added</h4>
+<ul>
+  <li>Full CLI command set</li>
+  <li>Encrypted vault</li>
+</ul>
+
+<h4>Fixed</h4>
+<ul>
+  <li>Mypy configuration</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="021">[0.2.1] — 2025-12-27</h3>
+
+<h4>Added</h4>
+<ul>
+  <li>Automated PyPI publishing</li>
+</ul>
+
+<h4>Changed</h4>
+<ul>
+  <li>Updated internal version</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="020">[0.2.0] — 2025-12-27</h3>
+
+<h4>Added</h4>
+<ul>
+  <li>First official PyPI release</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="011">[0.1.1] — 2025-12-27</h3>
+
+<h4>Added</h4>
+<ul>
+  <li>Complete project layout</li>
+  <li>TOTP generator</li>
+  <li>Argon2 + AES-GCM pipeline</li>
+</ul>
+
+<div class="my-6"></div>
+
+<h3 id="010">[0.1.0] — 2025-12-26</h3>
+
+<h4>Added</h4>
+<ul>
+  <li>Initial project scaffold</li>
+  <li>Minimal TOTP and storage prototype</li>
+</ul>
+
+  </div>
+</BaseLayout>

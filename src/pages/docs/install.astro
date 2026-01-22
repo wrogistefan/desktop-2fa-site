@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Installation">
+  <div class="max-w-3xl mx-auto px-4 py-8 prose prose-invert">
+
+    <a href="/docs" class="text-blue-400 hover:underline block mb-6">
+      ← Back to documentation
+    </a>
+
+    <!-- INSTALLATION CONTENT STARTS HERE -->
+    <h1>Installation</h1>
+
+    <p>Desktop‑2FA can be installed on all major platforms.  
+    The application is fully offline and requires only Python 3.12+.</p>
+
+    <h2>macOS</h2>
+
+    <h3>Homebrew</h3>
+    <pre><code>brew install desktop-2fa</code></pre>
+
+    <h3>pipx</h3>
+    <pre><code>pipx install desktop-2fa</code></pre>
+
+    <h3>pip</h3>
+    <pre><code>pip install desktop-2fa</code></pre>
+
+    <hr />
+
+    <h2>Linux</h2>
+
+    <h3>pipx (recommended)</h3>
+    <pre><code>pipx install desktop-2fa</code></pre>
+
+    <h3>pip</h3>
+    <pre><code>pip install desktop-2fa</code></pre>
+
+    <h3>From source</h3>
+    <pre><code>git clone https://github.com/wrogistefan/desktop-2fa
+cd desktop-2fa
+pip install .
+    </code></pre>
+
+    <hr />
+
+    <h2>Windows</h2>
+
+    <h3>pipx (recommended)</h3>
+    <pre><code>pipx install desktop-2fa</code></pre>
+
+    <h3>pip</h3>
+    <pre><code>pip install desktop-2fa</code></pre>
+
+    <h3>Password file permissions</h3>
+    <p>Ensure password files are readable only by your user.</p>
+
+    <hr />
+
+    <h2>Verify installation</h2>
+    <pre><code>python -c "import desktop_2fa; print(desktop_2fa.__version__)"</code></pre>
+
+    <hr />
+
+    <h2>Next steps</h2>
+    <ul>
+      <li>Read the CLI reference</li>
+      <li>Learn how the vault works</li>
+      <li>Review the security model</li>
+    </ul>
+
+    <!-- INSTALLATION CONTENT ENDS HERE -->
+
+  </div>
+</BaseLayout>

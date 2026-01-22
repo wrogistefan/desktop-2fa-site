@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="FAQ">
+  <div>
+
+    <a href="/docs" class="back-link">
+      ← Back to documentation
+    </a>
+
+   <h1>FAQ — Frequently Asked Questions</h1>
+
+<p>This FAQ covers the most common questions about Desktop‑2FA, vault behavior, security, installation, and CLI usage.</p>
+
+<hr />
+
+<h2>What is Desktop‑2FA?</h2>
+<p>Desktop‑2FA is a fully offline TOTP authenticator for developers and power users.  
+It stores secrets in an encrypted vault using Argon2id + AES‑256‑GCM.</p>
+
+<hr />
+
+<h2>Where is the vault stored?</h2>
+
+<ul>
+  <li><strong>Linux/macOS</strong>: <code>~/.desktop-2fa/vault</code></li>
+  <li><strong>Windows</strong>: <code>C:\Users\&lt;username&gt;\.desktop-2fa\vault</code></li>
+</ul>
+
+<p>The vault is created automatically when needed.</p>
+
+<hr />
+
+<h2>What happens if the vault does not exist?</h2>
+
+<p>Running commands like <code>d2fa list</code> or <code>d2fa add</code> will:</p>
+
+<ol>
+  <li>Show “No vault found.”</li>
+  <li>Announce that a new vault will be created.</li>
+  <li>Prompt for password + confirmation.</li>
+  <li>Create the vault explicitly.</li>
+</ol>
+
+<p><strong>Vault creation is never silent.</strong></p>
+
+<hr />
+
+<h2>Can I recover my vault password?</h2>
+
+<p><strong>No.</strong>  
+There is no recovery mechanism. If you lose your password:</p>
+
+<ol>
+  <li>Restore from a backup</li>
+  <li>Re-export tokens from providers</li>
+  <li>Create a new vault</li>
+</ol>
+
+<hr />
+
+<h2>Why does Desktop‑2FA require the password every time?</h2>
+
+<p>For security reasons:</p>
+
+<ul>
+  <li>Every vault access requires explicit password input</li>
+  <li>Even during the unlock window, password must be provided</li>
+  <li><code>.vault-unlocked</code> contains only a timestamp</li>
+</ul>
+
+<p>This prevents accidental or unauthorized access.</p>
+
+<hr />
+
+<h2>Why was my old vault rejected?</h2>
+
+<h3>Vault Format Change (0.6.0)</h3>
+
+<p>Vaults created before version 0.6.0 are <strong>not compatible</strong> with current versions.</p>
+
+<p>You will see:</p>
+
+<pre><code>Unsupported vault format</code></pre>
+
+<p>Old vaults lacked:</p>
+
+<ul>
+  <li>version field</li>
+  <li>magic header <code>D2FA</code></li>
+  <li>stable Argon2id parameters</li>
+  <li>audited ciphertext layout</li>
+</ul>
+
+<p>Create a new vault using:</p>
+
+<pre><code>d2fa init-vault</code></pre>
+
+<hr />
+
+<h2>Why does rename sometimes fail?</h2>
+
+<p>If multiple entries share the same name, rename is aborted:</p>
+
+<pre><code>Error: Multiple entries named '&lt;name&gt;' exist. Operation aborted. Resolve duplicates first.
+</code></pre>
+
+<p>This ensures deterministic behavior.</p>
+
+<hr />
+
+<h2>Why does Desktop‑2FA reject my Base32 secret?</h2>
+
+<p>Secrets must be valid Base32.  
+If invalid:</p>
+
+<pre><code>[red]Invalid secret: not valid Base32.[/red]
+Example: ABCDEFGHIJKL2345
+</code></pre>
+
+<p>Fix the secret or re-copy it from the provider.</p>
+
+<hr />
+
+<h2>Does Desktop‑2FA support otpauth:// URLs?</h2>
+
+<p>Yes.</p>
+
+<pre><code>d2fa add "otpauth://totp/GitHub:lukas?secret=ABC123&issuer=GitHub"
+</code></pre>
+
+<p>The CLI extracts:</p>
+
+<ul>
+  <li>issuer</li>
+  <li>label</li>
+  <li>secret</li>
+</ul>
+
+<hr />
+
+<h2>Why does Desktop‑2FA ask for password confirmation?</h2>
+
+<p>Only during vault creation.  
+This prevents accidental creation with mistyped passwords.</p>
+
+<hr />
+
+<h2>Why does Desktop‑2FA refuse to run without a password?</h2>
+
+<p>In non‑interactive mode, password must be provided via:</p>
+
+<ul>
+  <li><code>--password</code></li>
+  <li><code>--password-file</code></li>
+</ul>
+
+<p>This prevents scripts from accidentally creating or modifying vaults without authentication.</p>
+
+<hr />
+
+<h2>Can I use Desktop‑2FA in scripts?</h2>
+
+<p>Yes — use:</p>
+
+<pre><code>--password-file
+</code></pre>
+
+<p>Ensure the file is readable only by your user.</p>
+
+<hr />
+
+<h2>Why does Desktop‑2FA warn about weak passwords?</h2>
+
+<p>Password strength is configurable:</p>
+
+<pre><code>[security]
+min_password_entropy = 60
+reject_weak_passwords = false
+</code></pre>
+
+<p>Weak passwords may be:</p>
+
+<ul>
+  <li>allowed with warning</li>
+  <li>rejected</li>
+  <li>bypassed with <code>--allow-weak-passwords</code></li>
+</ul>
+
+<hr />
+
+<h2>How do I back up my vault?</h2>
+
+<pre><code>d2fa backup
+d2fa export backup.bin
+</code></pre>
+
+<p>Backups are encrypted with the same password.</p>
+
+<hr />
+
+<h2>How do I migrate to another machine?</h2>
+
+<pre><code># On source machine
+d2fa export transfer.bin
+
+# Transfer file
+
+# On destination machine
+d2fa import transfer.bin
+</code></pre>
+
+<hr />
+
+<h2>Does Desktop‑2FA sync between devices?</h2>
+
+<p>No.  
+It is intentionally offline‑only for security.</p>
+
+<hr />
+
+<h2>Does Desktop‑2FA store anything in the cloud?</h2>
+
+<p>No.  
+Everything is local and encrypted.</p>
+
+<hr />
+
+<h2>How do I report issues?</h2>
+
+<p>Contact: <strong>contact@desktop-2fa.org</strong></p>
+
+
+  </div>
+</BaseLayout>

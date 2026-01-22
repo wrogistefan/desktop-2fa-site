@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Vault Lifecycle">
+  <div>
+
+    <a href="/docs" class="back-link">
+      ← Back to documentation
+    </a>
+
+    <h1>Vault Lifecycle</h1>
+
+<p>This document describes the complete lifecycle of the Desktop‑2FA vault, including creation, unlocking, password handling, error behavior, and UX guarantees. It combines the authoritative UX contract with the functional behavior described in the User Manual.</p>
+
+<hr />
+
+<h2>Vault States</h2>
+
+<ul>
+  <li><strong>Vault Missing</strong> — no vault file exists on disk</li>
+  <li><strong>Vault Exists</strong> — vault file is present</li>
+  <li><strong>Password Required</strong> — vault exists but is not yet decrypted</li>
+  <li><strong>Password Invalid</strong> — incorrect password provided</li>
+</ul>
+
+<hr />
+
+<h2>State: Vault Missing</h2>
+
+<h3>d2fa list</h3>
+<pre><code>No vault found.
+A new encrypted vault will be created.
+
+Enter new vault password:
+Confirm vault password:
+
+Vault created at &lt;path&gt;.
+No entries found.
+</code></pre>
+
+<h3>d2fa add NAME ISSUER SECRET</h3>
+<pre><code>No vault found.
+A new encrypted vault will be created.
+
+Enter new vault password:
+Confirm vault password:
+
+Vault created at &lt;path&gt;.
+Entry added: NAME
+</code></pre>
+
+<h3>d2fa generate</h3>
+<pre><code>No vault found.
+Nothing to generate.
+</code></pre>
+
+<p><strong>No vault is created</strong> in this case.</p>
+
+<hr />
+
+<h2>State: Vault Exists (Password Required)</h2>
+
+<h3>d2fa list</h3>
+<pre><code>Enter vault password:
+- EntryName (Issuer)
+</code></pre>
+
+<h3>d2fa add NAME ISSUER SECRET</h3>
+<pre><code>Enter vault password:
+Entry added: NAME
+</code></pre>
+
+<hr />
+
+<h2>State: Invalid Password</h2>
+
+<pre><code>Invalid vault password.</code></pre>
+
+<ul>
+  <li>No confirmation prompt</li>
+  <li>No retries</li>
+  <li>No writes</li>
+  <li>No state changes</li>
+</ul>
+
+<hr />
+
+<h2>Vault Creation Rules</h2>
+
+<ul>
+  <li>Vault creation is <strong>never silent</strong>.</li>
+  <li>Password confirmation is required only during creation.</li>
+  <li>Invalid passwords never mutate state.</li>
+  <li>Every state‑mutating operation emits a confirmation message.</li>
+  <li>UX describes intent even if implementation is implicit.</li>
+</ul>
+
+<hr />
+
+<h2>Password Handling</h2>
+
+<h3>Password Sources</h3>
+<ol>
+  <li>Interactive prompt</li>
+  <li><code>--password</code> option</li>
+  <li><code>--password-file</code> option</li>
+</ol>
+
+<h3>Password Validation Rules</h3>
+
+<ul>
+  <li><strong>Empty passwords</strong> are rejected immediately.</li>
+  <li>Password confirmation is required during vault creation.</li>
+  <li>Password strength checks depend on configuration.</li>
+  <li>Weak passwords may warn or reject depending on settings.</li>
+</ul>
+
+<h3>Password Strength Configuration</h3>
+
+<pre><code>[security]
+min_password_entropy = 60
+reject_weak_passwords = false
+</code></pre>
+
+<p>Entropy rules:</p>
+<ul>
+  <li>Passphrases: 11 bits × number of words</li>
+  <li>Passwords: log2(N^L)</li>
+</ul>
+
+<p>Bypass with:</p>
+<pre><code>--allow-weak-passwords
+D2FA_ALLOW_WEAK_PASSWORDS=1
+</code></pre>
+
+<hr />
+
+<h2>Vault Unlocking Security</h2>
+
+<ul>
+  <li>Password authentication is required for <strong>every</strong> vault access.</li>
+  <li>The unlock timeout still requires explicit password input.</li>
+  <li><code>.vault-unlocked</code> contains only a timestamp.</li>
+</ul>
+
+<hr />
+
+<h2>Vault File Location</h2>
+
+<ul>
+  <li><strong>Linux/macOS</strong>: <code>~/.desktop-2fa/vault</code></li>
+  <li><strong>Windows</strong>: <code>C:\Users\&lt;username&gt;\.desktop-2fa\vault</code></li>
+</ul>
+
+<p>The vault file is created automatically on first use.</p>
+
+<hr />
+
+<h2>Vault Format Compatibility</h2>
+
+<h3>⚠️ Vault Format Change (0.6.0)</h3>
+
+<p>Vaults created with versions prior to 0.6.0 are <strong>not compatible</strong> with current versions.</p>
+
+<p>They will be rejected as:</p>
+
+<pre><code>Vault file format is unsupported</code></pre>
+
+<p>Users must create a new vault with <code>d2fa init-vault</code>.</p>
+
+<hr />
+
+<h2>Duplicate Names in Vault</h2>
+
+<p>Older versions allowed duplicate entry names. When loading such vaults, a warning may appear:</p>
+
+<pre><code>Warning: Your vault contains multiple entries with the same name.
+</code></pre>
+
+<h3>Resolution</h3>
+
+<pre><code>d2fa rename GitHub GitHub-personal
+d2fa rename GitHub GitHub-work
+</code></pre>
+
+<p>The <strong>rename</strong> command updates both:</p>
+<ul>
+  <li>account name (unique identifier)</li>
+  <li>issuer (display label)</li>
+</ul>
+
+<h3>Duplicate Detection</h3>
+
+<pre><code>Error: Multiple entries named '&lt;name&gt;' exist. Operation aborted. Resolve duplicates first.
+</code></pre>
+
+<p>No entry is renamed if duplicates exist.</p>
+
+<hr />
+
+<h2>Error Handling</h2>
+
+<h3>Common Errors</h3>
+
+<ul>
+  <li><strong>Invalid vault password</strong></li>
+  <li><strong>Unsupported vault format</strong></li>
+  <li><strong>Invalid Base32 secret</strong></li>
+  <li><strong>Entry not found</strong></li>
+  <li><strong>Password too weak</strong></li>
+  <li><strong>Passwords do not match</strong></li>
+  <li><strong>Cannot specify both --password and --password-file</strong></li>
+  <li><strong>Password required in non-interactive mode</strong></li>
+  <li><strong>Permission denied</strong></li>
+</ul>
+
+<hr />
+
+<h2>Forgotten Password</h2>
+
+<p><strong>There is no way to recover a forgotten password.</strong></p>
+
+<p>If password is lost:</p>
+<ol>
+  <li>Restore from backup (if available)</li>
+  <li>Re-export tokens from providers</li>
+  <li>Create a new vault</li>
+</ol>
+
+<hr />
+
+<h2>Backup Strategy</h2>
+
+<pre><code>d2fa backup
+d2fa export ~/Documents/vault-$(date +%Y%m%d).bin
+d2fa import ~/Documents/vault-20231201.bin --force
+</code></pre>
+
+<hr />
+
+<h2>Migration Between Machines</h2>
+
+<pre><code># On source machine
+d2fa export transfer.bin
+
+# Transfer file
+
+# On destination machine
+d2fa import transfer.bin
+</code></pre>
+
+<hr />
+
+<h2>UX Invariants</h2>
+
+<ul>
+  <li>Vault creation is always announced.</li>
+  <li>Password confirmation only during creation.</li>
+  <li>Wrong passwords never trigger writes.</li>
+  <li>Output is deterministic and testable.</li>
+  <li>No silent side‑effects.</li>
+</ul>
+
+<hr />
+
+<h2>Contact</h2>
+
+<p>For questions or support, contact <strong>contact@desktop-2fa.org</strong>.</p>
+
+
+  </div>
+</BaseLayout>

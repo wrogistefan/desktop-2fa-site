@@ -1,0 +1,89 @@
+<!--
+  Comparison section
+-->
+
+<section id="comparison" aria-labelledby="comparison-heading">
+  <h2 id="comparison-heading">Comparison</h2>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature / Tool</th>
+          <th>desktop‑2fa</th>
+          <th>Proton Authenticator</th>
+          <th>Google Authenticator</th>
+          <th>Authy</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Platform</td>
+          <td>Linux (CLI) • macOS (CLI) • Windows (CLI)</td>
+          <td>Android, iOS • Windows (GUI) • macOS (GUI) • Linux (GUI)</td>
+          <td>Android, iOS</td>
+          <td>Android, iOS • Windows (GUI) • macOS</td>
+        </tr>
+
+        <tr>
+          <td>Offline-only</td>
+          <td><span class="yes">✔️</span></td>
+          <td>Offline‑first (cloud backup optional)</td>
+          <td><span class="yes">✔️</span></td>
+          <td><span class="no">✖️</span></td>
+        </tr>
+
+        <tr>
+          <td>Cloud sync</td>
+          <td><span class="no">✖️</span></td>
+          <td>Optional encrypted Proton backup</td>
+          <td><span class="no">✖️</span></td>
+          <td><span class="yes">✔️</span></td>
+        </tr>
+
+        <tr>
+          <td>Vault encryption</td>
+          <td><strong>AES‑256‑GCM + Argon2</strong></td>
+          <td>
+            Web/desktop: encrypted local vault (React/Tauri app) •
+            Mobile: AES‑256‑GCM + Argon2
+          </td>
+          <td>Device-level only</td>
+          <td>Cloud-managed</td>
+        </tr>
+
+        <tr>
+          <td>App architecture</td>
+          <td>Native desktop app (Python + Qt)</td>
+          <td>Web‑based React app packaged as a desktop wrapper (Tauri/Electron)</td>
+          <td>Native mobile app</td>
+          <td>Proprietary multi‑platform app</td>
+        </tr>
+
+        <tr>
+          <td>Open source</td>
+          <td><span class="yes">✔️</span></td>
+          <td>Yes (mobile aps +WebClients monorepo)</td>
+          <td>Partial</td>
+          <td><span class="no">✖️</span></td>
+        </tr>
+
+        <tr>
+          <td>Suitable for air‑gapped use</td>
+          <td><span class="yes">✔️</span></td>
+          <td>Not recommended (web‑based architecture)</td>
+          <td><span class="yes">✔️</span></td>
+          <td><span class="no">✖️</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="comparison-disclaimer">
+    <strong>Comparison philosophy:</strong>
+    This table highlights architectural differences between tools.
+    It does not judge security or quality — each project has different goals and trade‑offs.
+    Information is based on publicly available documentation and open‑source repositories.
+  </p>
+</section>

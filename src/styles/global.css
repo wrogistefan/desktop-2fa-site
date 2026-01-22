@@ -479,3 +479,16 @@ tr:last-child td {
     padding: 10px 12px;
   }
 }
+/* Back link styling */
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--color-link);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.back-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}

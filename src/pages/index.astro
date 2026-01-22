@@ -1,52 +1,67 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Install from '../components/Install.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import SecurityModel from '../components/SecurityModel.astro';
+import CLIExamples from '../components/CLIExamples.astro';
+import WhoIsItFor from '../components/WhoIsItFor.astro';
+import Comparison from '../components/Comparison.astro';
+import FAQ from '../components/FAQ.astro';
+import Roadmap from '../components/Roadmap.astro';
 import Footer from '../components/Footer.astro';
+import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>desktop‑2fa — Offline TOTP Authenticator</title>
-    <meta name="description" content="Offline TOTP authenticator with AES‑256‑GCM encryption, Argon2 key derivation, deterministic builds, and no cloud dependencies.">
-    <meta
-      name="keywords"
-      content="offline TOTP manager, open source authenticator, local 2FA, desktop TOTP, CLI authenticator, privacy tools, developer security, offline 2FA, open standards"
-    />
-    <meta name="author" content="Łukasz Perek" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="desktop-2fa — Offline TOTP Manager" />
-    <meta
-      property="og:description"
-      content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.svg" />
-    <meta property="og:url" content="https://desktop-2fa.example.com/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="desktop-2fa — Offline TOTP Manager" />
-    <meta
-      name="twitter:description"
-      content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable."
-    />
-    <meta name="twitter:image" content="/og-image.svg" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href="https://desktop-2fa.lukasz-perek.workers.dev/" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "desktop-2fa",
-      "applicationCategory": "SecurityApplication",
-      "operatingSystem": "Windows, macOS, Linux",
-      "description": "Offline TOTP authenticator with AES-256-GCM encryption, Argon2 key derivation, deterministic builds, and no cloud dependencies.",
-      "url": "https://desktop-2fa.lukasz-perek.workers.dev/",
-      "softwareVersion": "1.0.0",
-      "license": "https://github.com/wrogistefan/desktop-2fa/blob/main/LICENSE",
-      "sourceCode": "https://github.com/wrogistefan/desktop-2fa"
-    }
-    </script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>desktop‑2fa — Offline TOTP Authenticator</title>
+
+  <meta name="description" content="Offline TOTP authenticator with AES‑256‑GCM encryption, Argon2 key derivation, deterministic builds, and no cloud dependencies.">
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Łukasz Perek" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="desktop‑2fa — Offline TOTP Authenticator" />
+  <meta property="og:description" content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://desktop-2fa.org/og-image.svg" />
+  <meta property="og:url" content="https://desktop-2fa.org/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="desktop‑2fa — Offline TOTP Authenticator" />
+  <meta name="twitter:description" content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable." />
+  <meta name="twitter:image" content="https://desktop-2fa.org/og-image.svg" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://desktop-2fa.org/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "desktop-2fa",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Windows, macOS, Linux",
+    "description": "Offline TOTP authenticator with AES-256-GCM encryption, Argon2 key derivation, deterministic builds, and no cloud dependencies.",
+    "url": "https://desktop-2fa.org/",
+    "softwareVersion": "1.0.0",
+    "license": "https://github.com/wrogistefan/desktop-2fa/blob/main/LICENSE",
+    "sourceCode": "https://github.com/wrogistefan/desktop-2fa"
+  }
+  </script>
+</head>
+
 
   <body>
     <div class="page">
@@ -54,238 +69,18 @@ import Footer from '../components/Footer.astro';
         <Header />
 
         <div class="container">
-
-          <!-- WHAT IS IT -->
-          <section aria-labelledby="about-heading">
-            <h2 id="about-heading">What is it and why it was built</h2>
-            <p>
-              desktop‑2fa is a local‑first TOTP authenticator for people who want their second factor to
-               live on machines they actually control. No cloud sync, no proprietary mobile apps,
-                no vendor lock‑in — just a small, auditable tool that does one job well.
-            </p>
-            <p>
-              It was built for developers, sysadmins, and privacy‑focused users who prefer reproducible,
-               scriptable workflows over opaque GUIs. Many authenticators hide their storage behind platform keystores
-               or online accounts. desktop‑2fa takes the opposite approach: a documented vault format,
-               strong password‑based encryption, and predictable CLI behavior you can trust and automate.
-            </p>
-            <p>
-              It doesn’t try to replace hardware tokens or solve every threat model. It focuses on clarity,
-              portability, and giving you full ownership of your TOTP secrets — without depending on anyone’s cloud.
-            </p>
-          </section>
-
-          <!-- FEATURES -->
-          <section aria-labelledby="features-heading">
-            <h2 id="features-heading">Features</h2>
-            <div class="features-grid">
-              <article class="feature">
-                <h3 class="feature-title">Offline, Local-First</h3>
-                <p class="feature-desc">No network required. Secrets never leave your machine.</p>
-              </article>
-              <article class="feature">
-                <h3 class="feature-title">Encrypted Vault</h3>
-                <p class="feature-desc">AES-256-GCM encryption with Argon2 key derivation.</p>
-              </article>
-              <article class="feature">
-                <h3 class="feature-title">Open Standards</h3>
-                <p class="feature-desc">Transparent code. Every line is readable and auditable.</p>
-              </article>
-              <article class="feature">
-                <h3 class="feature-title">CLI-First Workflow</h3>
-                <p class="feature-desc">Designed for terminal users and automation scripts.</p>
-              </article>
-              <article class="feature">
-                <h3 class="feature-title">Reproducible, Auditable</h3>
-                <p class="feature-desc">Deterministic builds. High coverage on critical paths.</p>
-              </article>
-              <article class="feature">
-                <h3 class="feature-title">No Cloud, No Telemetry</h3>
-                <p class="feature-desc">Zero tracking. Zero data collection. Zero exceptions.</p>
-              </article>
-            </div>
-          </section>
-
-          <!-- INSTALL -->
-          <section id="install" aria-labelledby="install-heading">
-            <h2 id="install-heading">Install</h2>
-            <p>Install from PyPI:</p>
-            <pre><code>pip install desktop-2fa</code></pre>
-            <p>Basic usage:</p>
-            <pre><code># Add a TOTP entry
-desktop-2fa add
-
-# Generate a code
-desktop-2fa code &lt;account&gt;
-
-# List all entries
-desktop-2fa list</code></pre>
-          </section>
-
-         <!-- COMPARISON -->
-  <section id="comparison" aria-labelledby="comparison-heading">
-    <h2 id="comparison-heading">Comparison</h2>
-
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Feature / Tool</th>
-            <th>desktop‑2fa</th>
-            <th>Proton Authenticator</th>
-            <th>Google Authenticator</th>
-            <th>Authy</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Platform</td>
-            <td>Linux (CLI) • macOS (CLI) • Windows (CLI)</td>
-            <td>Android, iOS • Windows (GUI) • macOS (GUI) • Linux (GUI)</td>
-            <td>Android, iOS</td>
-            <td>Android, iOS • Windows (GUI) • macOS</td>
-          </tr>
-
-          <tr>
-            <td>Offline-only</td>
-            <td><span class="yes">✔️</span></td>
-            <td>Offline‑first (cloud backup optional)</td>
-            <td><span class="yes">✔️</span></td>
-            <td><span class="no">✖️</span></td>
-          </tr>
-
-          <tr>
-            <td>Cloud sync</td>
-            <td><span class="no">✖️</span></td>
-            <td>Optional encrypted Proton backup</td>
-            <td><span class="no">✖️</span></td>
-            <td><span class="yes">✔️</span></td>
-          </tr>
-
-          <tr>
-            <td>Vault encryption</td>
-            <td><strong>AES‑256‑GCM + Argon2</strong></td>
-            <td>
-              Web/desktop: encrypted local vault (React/Tauri app) •
-              Mobile: AES‑256‑GCM + Argon2
-            </td>
-            <td>Device-level only</td>
-            <td>Cloud-managed</td>
-          </tr>
-
-          <tr>
-            <td>App architecture</td>
-            <td>Native desktop app (Python + Qt)</td>
-            <td>Web‑based React app packaged as a desktop wrapper (Tauri/Electron)</td>
-            <td>Native mobile app</td>
-            <td>Proprietary multi‑platform app</td>
-          </tr>
-
-          <tr>
-            <td>Open source</td>
-            <td><span class="yes">✔️</span></td>
-            <td>Yes (mobile aps +WebClients monorepo)</td>
-            <td>Partial</td>
-            <td><span class="no">✖️</span></td>
-          </tr>
-
-          <tr>
-            <td>Suitable for air‑gapped use</td>
-            <td><span class="yes">✔️</span></td>
-            <td>Not recommended (web‑based architecture)</td>
-            <td><span class="yes">✔️</span></td>
-            <td><span class="no">✖️</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="comparison-disclaimer">
-      <strong>Comparison philosophy:</strong>
-      This table highlights architectural differences between tools.
-      It does not judge security or quality — each project has different goals and trade‑offs.
-      Information is based on publicly available documentation and open‑source repositories.
-    </p>
-  </section>
-
-
-          <!-- DESIGN PHILOSOPHY -->
-          <section aria-labelledby="philosophy-heading">
-            <h2 id="philosophy-heading">Design philosophy</h2>
-            <ul>
-              <li><strong>Local-first</strong> — no cloud, no sync, no vendor lock‑in.</li>
-              <li><strong>Deterministic</strong> — predictable behavior across platforms and releases.</li>
-              <li><strong>Minimal</strong> — no hidden magic, no surprise background processes.</li>
-              <li><strong>Reproducible</strong> — testable behavior, stable interfaces, clear invariants.</li>
-              <li><strong>Honest</strong> — no overpromising; limitations are documented, not hidden.</li>
-            </ul>
-          </section>
-
-          <!-- FAQ -->
-          <section aria-labelledby="faq-heading">
-            <h2 id="faq-heading">FAQ</h2>
-            <dl>
-              <dt>Does it sync across devices?</dt>
-              <dd>No. desktop‑2fa is offline‑only.</dd>
-
-              <dt>Can I recover my vault password?</dt>
-              <dd>No. There is no recovery key or remote reset.</dd>
-
-              <dt>Is there a GUI?</dt>
-              <dd>Not yet. A GUI is planned as a separate layer.</dd>
-
-              <dt>Can I import QR codes?</dt>
-              <dd>otpauth URLs are supported. QR import is planned.</dd>
-
-              <dt>Is it suitable for air‑gapped machines?</dt>
-              <dd>Yes. It requires no network access.</dd>
-            </dl>
-          </section>
-
-          <!-- ROADMAP -->
-          <section aria-labelledby="roadmap-heading">
-            <h2 id="roadmap-heading">Roadmap</h2>
-            <ul>
-              <li>GUI interface</li>
-              <li>HOTP support</li>
-              <li>QR code import</li>
-              <li>Rust backend</li>
-            </ul>
-          </section>
-
-          <!-- SUPPORT -->
-          <section aria-labelledby="support-heading">
-            <h2 id="support-heading">Support the Project</h2>
-            <p>
-              desktop‑2fa is an independent open‑source tool built with a focus
-              on autonomy, transparency, and offline security. If you find it
-              useful and want to support ongoing development, you can do so
-              through the platforms below.
-            </p>
-
-            <div class="features-grid">
-              <article class="feature">
-                <h3 class="feature-title">Ko‑fi</h3>
-                <p class="feature-desc">One‑time or recurring support.</p>
-                <p><a href="https://ko-fi.com/lukaszperek" target="_blank" rel="noopener">ko-fi.com/lukaszperek</a></p>
-              </article>
-
-              <article class="feature">
-                <h3 class="feature-title">Buy Me a Coffee</h3>
-                <p class="feature-desc">Simple way to support the project.</p>
-                <p><a href="https://buymeacoffee.com/lukaszperek" target="_blank" rel="noopener">buymeacoffee.com/lukaszperek</a></p>
-              </article>
-
-              <article class="feature">
-                <h3 class="feature-title">AirTM</h3>
-                <p class="feature-desc">Direct support via AirTM.</p>
-                <p><a href="https://airtm.me/lukper" target="_blank" rel="noopener">airtm.me/lukper</a></p>
-              </article>
-            </div>
-          </section>
-
+          <Hero />
+          <Install />
+          <Features />
+          <HowItWorks />
+          <SecurityModel />
+          <CLIExamples />
+          <WhoIsItFor />
+          <Comparison />
+          <FAQ />
+          <Roadmap />
           <Footer />
+          <AfterFooterDocsLinks />
         </div>
       </main>
     </div>

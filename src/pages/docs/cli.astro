@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="CLI Reference">
+  <div>
+
+    <a href="/docs" class="back-link">
+      ← Back to documentation
+    </a>
+
+    <h1>CLI Reference</h1>
+
+<p>The Desktop‑2FA command-line interface provides full control over TOTP entries, vault lifecycle, backups, imports, and exports. All commands are stateless and require explicit password authentication.</p>
+
+<hr />
+
+<h2>Global Options</h2>
+
+<ul>
+  <li><code>--password PASSWORD</code> — Provide password directly</li>
+  <li><code>--password-file FILE</code> — Read password from file</li>
+  <li><code>--allow-weak-passwords</code> — Bypass password strength checks</li>
+  <li><code>--help</code> — Show help for the command</li>
+</ul>
+
+<hr />
+
+<h2>init-vault — Initialize New Vault</h2>
+
+<p>Creates a new encrypted vault file.</p>
+
+<pre><code>d2fa init-vault [--force]</code></pre>
+
+<h3>Options</h3>
+<ul>
+  <li><code>--force</code> — Overwrite existing vault</li>
+</ul>
+
+<h3>Examples</h3>
+<pre><code>d2fa init-vault
+d2fa init-vault --force
+d2fa init-vault --password-file ~/.vault_pass
+</code></pre>
+
+<hr />
+
+<h2>list — List All Entries</h2>
+
+<p>Displays all stored TOTP entries.</p>
+
+<pre><code>d2fa list</code></pre>
+
+<h3>Example Output</h3>
+<pre><code>- GitHub (GitHub)
+- AWS (Amazon)
+- Google (personal)
+</code></pre>
+
+<hr />
+
+<h2>add — Add New TOTP Entry</h2>
+
+<pre><code>d2fa add [NAME] [ISSUER] [SECRET]</code></pre>
+
+<h3>Parameters</h3>
+<ul>
+  <li><strong>NAME</strong> — Unique identifier (optional in interactive mode)</li>
+  <li><strong>ISSUER</strong> — Provider name (optional in interactive mode)</li>
+  <li><strong>SECRET</strong> — Base32 secret (optional in interactive mode)</li>
+</ul>
+
+<h3>Interactive Mode</h3>
+
+<pre><code>d2fa add
+Name (unique identifier): GitHub
+Issuer: GitHub
+Secret: JBSWY3DPEHPK3PXP
+</code></pre>
+
+<h3>Examples</h3>
+
+<pre><code># Add entry interactively
+d2fa add
+
+# Add with arguments
+d2fa add GitHub GitHub JBSWY3DPEHPK3PXP
+
+# Add using otpauth URL
+d2fa add "otpauth://totp/GitHub:user?secret=JBSWY3DPEHPK3PXP&issuer=GitHub"
+
+# Add with password from command line
+d2fa add GitHub GitHub JBSWY3DPEHPK3PXP --password mypassword
+</code></pre>
+
+<h3>Notes</h3>
+<ul>
+  <li><code>name</code> is the unique identifier used in CLI commands</li>
+  <li><code>issuer</code> is a display label and may repeat</li>
+  <li>Names must be unique</li>
+  <li>Older vaults may contain duplicates — use <code>rename</code> to fix</li>
+  <li>Secrets must be valid Base32</li>
+  <li>otpauth URLs are automatically parsed</li>
+  <li>If vault doesn't exist, it will be created</li>
+  <li>Secret input is visible in interactive mode</li>
+</ul>
+
+<hr />
+
+<h2>code — Generate TOTP Code</h2>
+
+<pre><code>d2fa code NAME</code></pre>
+
+<h3>Examples</h3>
+<pre><code>d2fa code GitHub
+# Output: 123456
+
+d2fa code "Google:personal"
+# Output: 789012
+</code></pre>
+
+<hr />
+
+<h2>remove — Remove Entry</h2>
+
+<pre><code>d2fa remove NAME</code></pre>
+
+<h3>Examples</h3>
+<pre><code>d2fa remove GitHub
+# Output: Removed entry: GitHub
+
+d2fa remove "AWS:root"
+</code></pre>
+
+<hr />
+
+<h2>rename — Rename Entry</h2>
+
+<pre><code>d2fa rename OLD_NAME NEW_NAME</code></pre>
+
+<h3>Examples</h3>
+<pre><code>d2fa rename GitHub GitHub-work
+# Output: Renamed 'GitHub' → 'GitHub-work'
+</code></pre>
+
+<h3>Duplicate Detection</h3>
+
+<pre><code>Error: Multiple entries named '&lt;name&gt;' exist. Operation aborted. Resolve duplicates first.
+</code></pre>
+
+<p>The rename operation aborts if multiple entries match the target name.</p>
+
+<hr />
+
+<h2>export — Export Vault</h2>
+
+<pre><code>d2fa export FILENAME</code></pre>
+
+<h3>Examples</h3>
+<pre><code>d2fa export backup.bin
+d2fa export ~/vault_backup.bin
+</code></pre>
+
+<hr />
+
+<h2>import — Import Vault</h2>
+
+<pre><code>d2fa import SOURCE_FILE [--force]</code></pre>
+
+<h3>Examples</h3>
+<pre><code>d2fa import backup.bin
+d2fa import new_vault.bin --force
+</code></pre>
+
+<hr />
+
+<h2>backup — Create Backup</h2>
+
+<pre><code>d2fa backup</code></pre>
+
+<h3>Examples</h3>
+<pre><code>d2fa backup
+# Output: Backup created: ~/.desktop-2fa/vault.backup.bin
+</code></pre>
+
+<hr />
+
+<h2>Password Management</h2>
+
+<h3>Password Sources</h3>
+
+<ol>
+  <li>Interactive prompt</li>
+  <li><code>--password</code> option</li>
+  <li><code>--password-file</code> option</li>
+</ol>
+
+<h3>Password Strength Enforcement</h3>
+
+<pre><code>[security]
+min_password_entropy = 60
+reject_weak_passwords = false
+</code></pre>
+
+<h3>Password Validation Rules</h3>
+
+<ul>
+  <li>Empty passwords are rejected</li>
+  <li>Password confirmation required during vault creation</li>
+  <li>Weak passwords may warn or reject depending on config</li>
+</ul>
+
+<hr />
+
+<h2>Error Handling</h2>
+
+<h3>Common Errors</h3>
+
+<ul>
+  <li><strong>Invalid vault password</strong></li>
+  <li><strong>Unsupported vault format</strong></li>
+  <li><strong>Invalid Base32 secret</strong></li>
+  <li><strong>Entry not found</strong></li>
+  <li><strong>Password too weak</strong></li>
+  <li><strong>Passwords do not match</strong></li>
+  <li><strong>Cannot specify both --password and --password-file</strong></li>
+  <li><strong>Password required in non-interactive mode</strong></li>
+  <li><strong>Permission denied</strong></li>
+</ul>
+
+<hr />
+
+<h2>Command Reference Summary</h2>
+
+<pre><code>
+d2fa --help
+d2fa COMMAND --help
+d2fa --version
+d2fa
+</code></pre>
+
+  </div>
+</BaseLayout>
