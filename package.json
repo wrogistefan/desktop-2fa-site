@@ -9,8 +9,7 @@
     "check": "astro check",
     "lint": "echo \"No lint configured\""
   },
-  "dependencies": {
-    "astro": "^5.0.0"
-  },
-  "devDependencies": {}
+  "devDependencies": {
+    "astro": "^5.16.6"
+  }
 }

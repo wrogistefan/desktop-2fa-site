@@ -59,20 +59,19 @@ import Footer from '../components/Footer.astro';
           <section aria-labelledby="about-heading">
             <h2 id="about-heading">What is it and why it was built</h2>
             <p>
-              desktop‑2fa is an offline TOTP authenticator for people who want to keep
-              their second factor on machines they control, without depending on
-              cloud sync, proprietary mobile apps, or vendor lock‑in.
+              desktop‑2fa is a local‑first TOTP authenticator for people who want their second factor to
+               live on machines they actually control. No cloud sync, no proprietary mobile apps,
+                no vendor lock‑in — just a small, auditable tool that does one job well.
             </p>
             <p>
-              It was built for developers, sysadmins, and privacy‑focused users who are
-              already comfortable in the terminal and prefer reproducible, scriptable
-              workflows over opaque GUIs and online services.
+              It was built for developers, sysadmins, and privacy‑focused users who prefer reproducible,
+               scriptable workflows over opaque GUIs. Many authenticators hide their storage behind platform keystores
+               or online accounts. desktop‑2fa takes the opposite approach: a documented vault format,
+               strong password‑based encryption, and predictable CLI behavior you can trust and automate.
             </p>
             <p>
-              Instead of trying to replace hardware tokens or handle every possible
-              threat model, desktop‑2fa focuses on doing one thing well:
-              storing and generating TOTP codes locally, with an auditable vault format
-              and predictable CLI behavior.
+              It doesn’t try to replace hardware tokens or solve every threat model. It focuses on clarity,
+              portability, and giving you full ownership of your TOTP secrets — without depending on anyone’s cloud.
             </p>
           </section>
 
@@ -123,117 +122,93 @@ desktop-2fa code &lt;account&gt;
 desktop-2fa list</code></pre>
           </section>
 
-          <!-- COMPARISON -->
-          <section id="comparison" aria-labelledby="comparison-heading">
-            <h2 id="comparison-heading">Comparison</h2>
+         <!-- COMPARISON -->
+  <section id="comparison" aria-labelledby="comparison-heading">
+    <h2 id="comparison-heading">Comparison</h2>
 
-            <div class="table-wrapper">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Feature / Tool</th>
-                    <th>desktop‑2fa</th>
-                    <th>Proton Authenticator</th>
-                    <th>Google Authenticator</th>
-                    <th>Authy</th>
-                  </tr>
-                </thead>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature / Tool</th>
+            <th>desktop‑2fa</th>
+            <th>Proton Authenticator</th>
+            <th>Google Authenticator</th>
+            <th>Authy</th>
+          </tr>
+        </thead>
 
-                <tbody>
-                  <tr>
-                    <td>Platform</td>
-                    <td>Linux (CLI) • macOS (CLI) • Windows (CLI)</td>
-                    <td>Android, iOS • Windows (GUI) • macOS (GUI) • Linux (GUI)</td>
-                    <td>Android, iOS</td>
-                    <td>Android, iOS • Windows (GUI) • macOS</td>
-                  </tr>
+        <tbody>
+          <tr>
+            <td>Platform</td>
+            <td>Linux (CLI) • macOS (CLI) • Windows (CLI)</td>
+            <td>Android, iOS • Windows (GUI) • macOS (GUI) • Linux (GUI)</td>
+            <td>Android, iOS</td>
+            <td>Android, iOS • Windows (GUI) • macOS</td>
+          </tr>
 
-                  <tr>
-                    <td>Offline-only</td>
-                    <td><span class="yes">✔️</span></td>
-                    <td><span class="no">✖️</span></td>
-                    <td><span class="yes">✔️</span></td>
-                    <td><span class="no">✖️</span></td>
-                  </tr>
+          <tr>
+            <td>Offline-only</td>
+            <td><span class="yes">✔️</span></td>
+            <td>Offline‑first (cloud backup optional)</td>
+            <td><span class="yes">✔️</span></td>
+            <td><span class="no">✖️</span></td>
+          </tr>
 
-                  <tr>
-                    <td>Cloud sync</td>
-                    <td><span class="no">✖️</span></td>
-                    <td>Optional</td>
-                    <td><span class="no">✖️</span></td>
-                    <td><span class="yes">✔️</span></td>
-                  </tr>
+          <tr>
+            <td>Cloud sync</td>
+            <td><span class="no">✖️</span></td>
+            <td>Optional encrypted Proton backup</td>
+            <td><span class="no">✖️</span></td>
+            <td><span class="yes">✔️</span></td>
+          </tr>
 
-                  <tr>
-                    <td>Vault encryption</td>
-                    <td><strong>AES‑256‑GCM + Argon2</strong></td>
-                    <td>Android/iOS: AES‑256‑GCM + Argon2, Windows: uses Windows Credential Manager (no public vault format)</td>
-                    <td>Device-level only</td>
-                    <td>Cloud-managed</td>
-                  </tr>
+          <tr>
+            <td>Vault encryption</td>
+            <td><strong>AES‑256‑GCM + Argon2</strong></td>
+            <td>
+              Web/desktop: encrypted local vault (React/Tauri app) •
+              Mobile: AES‑256‑GCM + Argon2
+            </td>
+            <td>Device-level only</td>
+            <td>Cloud-managed</td>
+          </tr>
 
-                  <tr>
-                    <td>Deterministic behavior</td>
-                    <td><span class="yes">✔️</span></td>
-                    <td><span class="no">✖️</span></td>
-                    <td><span class="no">✖️</span></td>
-                    <td><span class="no">✖️</span></td>
-                  </tr>
+          <tr>
+            <td>App architecture</td>
+            <td>Native desktop app (Python + Qt)</td>
+            <td>Web‑based React app packaged as a desktop wrapper (Tauri/Electron)</td>
+            <td>Native mobile app</td>
+            <td>Proprietary multi‑platform app</td>
+          </tr>
 
-                  <tr>
-                    <td>Open source</td>
-                    <td><span class="yes">✔️</span></td>
-                    <td>Open source (Android/iOS; desktop builds for Windows/macOS/Linux are binary-only, no source published)</td>
-                    <td>Partial</td>
-                    <td><span class="no">✖️</span></td>
-                  </tr>
+          <tr>
+            <td>Open source</td>
+            <td><span class="yes">✔️</span></td>
+            <td>Yes (mobile aps +WebClients monorepo)</td>
+            <td>Partial</td>
+            <td><span class="no">✖️</span></td>
+          </tr>
 
-                  <tr>
-                    <td>Suitable for air‑gapped use</td>
-                    <td><span class="yes">✔️</span></td>
-                    <td><span class="no">✖️</span></td>
-                    <td><span class="yes">✔️</span></td>
-                    <td><span class="no">✖️</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+          <tr>
+            <td>Suitable for air‑gapped use</td>
+            <td><span class="yes">✔️</span></td>
+            <td>Not recommended (web‑based architecture)</td>
+            <td><span class="yes">✔️</span></td>
+            <td><span class="no">✖️</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-          <!-- SECURITY MODEL -->
-          <section aria-labelledby="security-heading">
-            <h2 id="security-heading">Security model</h2>
-            <p>
-              desktop‑2fa is an offline, desktop‑first TOTP manager. Secrets and TOTP codes
-              live on the same machine, which is a deliberate trade‑off in favor of
-              usability and local control over strict isolation.
-            </p>
-            <p>
-              The vault is encrypted with a master password using modern primitives
-              (AES‑256‑GCM for confidentiality and integrity, Argon2 for key derivation).
-              There is no cloud backend, no telemetry, and no remote recovery mechanism.
-            </p>
-            <p>
-              It does not aim to replace certified hardware tokens or cover high‑risk,
-              targeted threat models. It is built for people who understand and accept
-              the implications of keeping their second factor on a trusted workstation.
-            </p>
-          </section>
+    <p class="comparison-disclaimer">
+      <strong>Comparison philosophy:</strong>
+      This table highlights architectural differences between tools.
+      It does not judge security or quality — each project has different goals and trade‑offs.
+      Information is based on publicly available documentation and open‑source repositories.
+    </p>
+  </section>
 
-          <!-- HARDWARE TOKENS -->
-          <section aria-labelledby="hardware-heading">
-            <h2 id="hardware-heading">How it compares to hardware tokens</h2>
-            <p>
-              desktop‑2fa is a software tool, not a hardware security module. It does not
-              provide tamper‑resistant storage or physical presence guarantees.
-            </p>
-            <ul>
-              <li>Runs on general‑purpose machines instead of dedicated hardware.</li>
-              <li>Fully scriptable and automatable via CLI.</li>
-              <li>Uses an encrypted vault instead of secure elements.</li>
-              <li>Open‑source and inspectable, but not formally certified.</li>
-            </ul>
-          </section>
 
           <!-- DESIGN PHILOSOPHY -->
           <section aria-labelledby="philosophy-heading">

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://desktop-2fa.lukasz-perek.workers.dev/sitemap.xml
