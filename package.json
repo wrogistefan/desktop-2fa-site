@@ -10,6 +10,11 @@
     "lint": "echo \"No lint configured\""
   },
   "devDependencies": {
-    "astro": "^5.16.6"
+    "@astrojs/check": "^0.9.12",
+    "astro": "^7.4.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "marked": "^16.4.1"
   }
 }

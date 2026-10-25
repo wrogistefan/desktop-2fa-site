@@ -4,15 +4,16 @@
 
 <section aria-labelledby="cli-examples-heading">
   <h2 id="cli-examples-heading">CLI examples</h2>
-  <pre><code># Add a new entry
-desktop-2fa add
+  <pre><code># Add a new entry (example secret)
+d2fa add GitHub GitHub JBSWY3DPEHPK3PXP
 
 # Generate a code
-desktop-2fa code github
+d2fa code GitHub --copy
 
 # List entries
-desktop-2fa list
+d2fa list
 
-# Export vault
-desktop-2fa export > backup.json</code></pre>
+# Create an encrypted backup
+d2fa backup</code></pre>
+  <p>See the <a href="/docs/cli">CLI reference</a> for vault options and other commands.</p>
 </section>

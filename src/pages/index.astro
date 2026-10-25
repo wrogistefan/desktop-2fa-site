@@ -15,20 +15,22 @@ import Footer from '../components/Footer.astro';
 import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
 ---
 
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>desktop‑2fa — Offline TOTP Authenticator</title>
 
-  <meta name="description" content="Offline TOTP authenticator with AES‑256‑GCM encryption, Argon2 key derivation, deterministic builds, and no cloud dependencies.">
+  <meta name="description" content="Offline TOTP authenticator with an encrypted local vault, a full CLI, and an early Textual terminal UI. No cloud sync.">
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Łukasz Perek" />
   <meta name="theme-color" content="#0f172a" />
 
   <!-- OpenGraph -->
   <meta property="og:title" content="desktop‑2fa — Offline TOTP Authenticator" />
-  <meta property="og:description" content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable." />
+  <meta property="og:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and early Textual terminal UI." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://desktop-2fa.org/og-image.svg" />
   <meta property="og:url" content="https://desktop-2fa.org/" />
@@ -36,7 +38,7 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="desktop‑2fa — Offline TOTP Authenticator" />
-  <meta name="twitter:description" content="An offline, open-source TOTP manager for developers and privacy-focused users. Local secrets, no cloud, fully auditable." />
+  <meta name="twitter:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and early Textual terminal UI." />
   <meta name="twitter:image" content="https://desktop-2fa.org/og-image.svg" />
 
   <!-- Canonical -->
@@ -53,9 +55,9 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
     "name": "desktop-2fa",
     "applicationCategory": "SecurityApplication",
     "operatingSystem": "Windows, macOS, Linux",
-    "description": "Offline TOTP authenticator with AES-256-GCM encryption, Argon2 key derivation, deterministic builds, and no cloud dependencies.",
+    "description": "Offline TOTP authenticator with an AES-256-GCM encrypted local vault, CLI, and early Textual terminal UI.",
     "url": "https://desktop-2fa.org/",
-    "softwareVersion": "1.0.0",
+    "softwareVersion": "0.8.3",
     "license": "https://github.com/wrogistefan/desktop-2fa/blob/main/LICENSE",
     "sourceCode": "https://github.com/wrogistefan/desktop-2fa"
   }

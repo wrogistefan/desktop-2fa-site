@@ -6,11 +6,11 @@ const jsonLd = {
   "alternateName": "Desktop Two-Factor Authenticator",
   "applicationCategory": "SecurityApplication",
   "operatingSystem": "Windows, macOS, Linux",
-  "softwareVersion": "0.7.3",
-  "description": "A secure offline desktop application for generating and managing TOTP 2FA codes. Features encrypted vault storage, Argon2id key derivation, AES-GCM encryption, deterministic CLI, and a fully local-first architecture with no cloud dependencies.",
+  "softwareVersion": "0.8.3",
+  "description": "An offline TOTP authenticator with an AES-256-GCM encrypted vault, Argon2id key derivation, CLI, and early Textual terminal UI.",
   "url": "https://desktop-2fa.org",
   "downloadUrl": "https://github.com/wrogistefan/desktop-2fa/releases",
-  "screenshot": "https://desktop-2fa.org/og-image.png",
+  "screenshot": "https://desktop-2fa.org/og-image.svg",
   "sourceCode": "https://github.com/wrogistefan/desktop-2fa",
   "license": "https://www.apache.org/licenses/LICENSE-2.0",
   "programmingLanguage": "Python",
@@ -32,6 +32,4 @@ const jsonLd = {
 };
 ---
 
-<script type="application/ld+json">
-  {JSON.stringify(jsonLd)}
-</script>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

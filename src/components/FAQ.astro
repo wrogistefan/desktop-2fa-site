@@ -5,19 +5,22 @@
 <section aria-labelledby="faq-heading">
   <h2 id="faq-heading">FAQ</h2>
   <dl>
-    <dt>Does it sync across devices?</dt>
-    <dd>No. desktop‑2fa is offline‑only.</dd>
+    <dt>Does desktop-2fa sync across devices?</dt>
+    <dd>No. Vaults are stored locally. You can create an encrypted backup and transfer it yourself.</dd>
 
-    <dt>Can I recover my vault password?</dt>
-    <dd>No. There is no recovery key or remote reset.</dd>
+    <dt>Can I recover a forgotten vault password?</dt>
+    <dd>No. Keep a secure backup and password; there is no recovery key or reset service.</dd>
 
-    <dt>Is there a GUI?</dt>
-    <dd>Not yet. A GUI is planned as a separate layer.</dd>
+    <dt>Does it have a user interface?</dt>
+    <dd>It has a full CLI and an early Textual terminal UI prototype (<code>d2fa ui</code>). The prototype can list entries, generate codes, and copy codes, but does not manage entries or create a missing vault.</dd>
 
-    <dt>Can I import QR codes?</dt>
-    <dd>otpauth URLs are supported. QR import is planned.</dd>
+    <dt>Can I add a token from an otpauth URL?</dt>
+    <dd>Yes. The CLI accepts <code>otpauth://</code> URLs with <code>d2fa add</code>. QR scanning is not listed as a current feature.</dd>
 
-    <dt>Is it suitable for air‑gapped machines?</dt>
-    <dd>Yes. It requires no network access.</dd>
+    <dt>Which Python versions are supported?</dt>
+    <dd>Python 3.11 or newer. Once installed, the app works with its local vault and does not need cloud services.</dd>
+
+    <dt>Where is the vault stored?</dt>
+    <dd>By default at <code>~/.desktop-2fa/vault</code>. Choose another file with <code>--vault</code> or set <code>DESKTOP_2FA_VAULT</code>.</dd>
   </dl>
 </section>

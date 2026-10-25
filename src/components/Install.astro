@@ -4,15 +4,19 @@
 
 <section id="install" aria-labelledby="install-heading">
   <h2 id="install-heading">Install</h2>
-  <p>Install from PyPI:</p>
-  <pre><code>pip install desktop-2fa</code></pre>
+  <p>Requires Python 3.11 or newer. Install from PyPI:</p>
+  <pre><code>python -m pip install desktop-2fa</code></pre>
+  <p>Or install the command-line app with pipx:</p>
+  <pre><code>pipx install desktop-2fa</code></pre>
   <p>Basic usage:</p>
-  <pre><code># Add a TOTP entry
-desktop-2fa add
+  <pre><code># Create a vault and add a TOTP entry
+d2fa vault init
+d2fa add GitHub GitHub JBSWY3DPEHPK3PXP
 
 # Generate a code
-desktop-2fa code &lt;account&gt;
+d2fa code GitHub
 
 # List all entries
-desktop-2fa list</code></pre>
+d2fa list</code></pre>
+  <p><a href="/docs/install">Installation guide</a> · <a href="/docs/cli">CLI reference</a></p>
 </section>

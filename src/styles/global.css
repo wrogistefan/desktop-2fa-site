@@ -258,6 +258,16 @@ ul {
   margin: 0 0 16px;
 }
 
+.docs-links {
+  display: grid;
+  gap: 8px;
+}
+
+.docs-links li {
+  display: list-item;
+  margin: 0;
+}
+
 li {
   margin-bottom: 6px;
 }
@@ -437,6 +447,21 @@ pre {
   border-radius: var(--radius-lg);
   background: var(--color-bg-elevated);
   box-shadow: var(--shadow-soft);
+}
+
+.changelog-content h2 {
+  margin-top: 44px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.changelog-content h3 {
+  margin-top: 28px;
+  color: var(--color-text);
+}
+
+.changelog-content a {
+  overflow-wrap: anywhere;
 }
 
 table {
