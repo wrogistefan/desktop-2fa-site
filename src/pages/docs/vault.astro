@@ -20,7 +20,7 @@ d2fa list</code></pre>
     <p>When an entry-management command needs a missing vault, the CLI creates an encrypted vault and reports its path. In non-interactive use, provide a password with <code>--password</code> or <code>--password-file</code>. The early <code>d2fa ui</code> prototype does not create a missing vault.</p>
 
     <h2>Password management</h2>
-    <p>Use <code>d2fa vault unlock</code> to verify the password and <code>d2fa vault change-password</code> to change it. Password strength is evaluated with zxcvbn; configuration can warn about weak passwords or reject them.</p>
+    <p>Use <code>d2fa vault unlock</code> to verify the password and <code>d2fa vault change-password</code> to change it. Interactive password creation and changes are evaluated with zxcvbn; by default weak passwords trigger a warning and confirmation, and configuration can reject them. See the <a href="/docs/security">security guide</a> for the scope of these checks.</p>
     <p>There is no password recovery mechanism. Keep a secure copy of your password.</p>
 
     <h2>Backups and migration</h2>
@@ -29,7 +29,7 @@ d2fa list</code></pre>
     <p>Use <code>d2fa export PATH</code> and <code>d2fa import PATH</code> to move a vault. Protect exported files and backups as carefully as the original vault.</p>
 
     <h2>File handling and compatibility</h2>
-    <p>The application accepts regular vault files up to 10 MiB and uses atomic replacement when saving. Vaults created with version 0.6.0 and later are designed to remain compatible with newer releases; still make a backup before upgrading.</p>
+    <p>The application accepts regular vault files up to 10 MiB and uses atomic replacement when saving. Normal CLI and Textual UI vault flows continue to require a non-empty password. However, the version 0.9.0 public Python API no longer opens vaults created by earlier API versions without a password. If this affects your vault, use the previous release to open it and re-save it with a non-empty password before upgrading; make a backup before migrating.</p>
     <p>See the upstream <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/README.md#vault-lifecycle">vault lifecycle notes</a> for current project guidance.</p>
   </div>
 </BaseLayout>

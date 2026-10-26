@@ -13,16 +13,11 @@ const label = "Toggle theme";
   </button>
 
   <script>
+    type Theme = 'light' | 'dark' | 'auto';
+
     const STORAGE_KEY = 'desktop2fa-theme';
 
-    function getSystemPreference() {
-      return window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    }
-
-    function applyTheme(theme) {
+    function applyTheme(theme: Theme) {
       const root = document.documentElement;
       const btnText = document.getElementById('theme-toggle-text');
       const btnIcon = document.getElementById('theme-toggle-icon');
@@ -53,7 +48,7 @@ const label = "Toggle theme";
       }
     }
 
-    function nextTheme(current) {
+    function nextTheme(current: string): Theme {
       if (current === 'auto') return 'light';
       if (current === 'light') return 'dark';
       return 'auto';

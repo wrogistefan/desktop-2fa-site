@@ -13,7 +13,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <ul>
       <li><strong>AES-256-GCM</strong> provides authenticated encryption for vault contents.</li>
       <li><strong>Argon2id</strong> derives a key from the vault password. Published parameters: time cost 4, memory cost 128 MiB, parallelism 2.</li>
-      <li><strong>zxcvbn</strong> evaluates password strength. Weak passwords can warn or be rejected through configuration.</li>
+      <li><strong>zxcvbn</strong> evaluates passwords during interactive vault creation and password changes. By default, weak passwords trigger a warning and confirmation; configuration can reject them.</li>
       <li>Vault access requires password authentication; the application does not rely on a persistent unlocked session.</li>
       <li>Vault loading is limited to regular files of at most 10 MiB, and saves use atomic replacement.</li>
     </ul>
@@ -22,12 +22,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>Encryption does not protect a vault after it has been unlocked on a compromised device. Desktop-2FA cannot defend against malware or a compromised operating system, physical observation, or unsafe handling of exported backups. Keep your operating system and dependencies trusted, protect the device, and store backups securely.</p>
 
     <h2>Password and backup responsibilities</h2>
+    <p>Interactive vault creation and password changes treat zxcvbn scores below 3 as weak. By default, the app warns and asks for confirmation; set <code>security.reject_weak_passwords = true</code> in <code>~/.config/d2fa/config.toml</code> to reject them. Passwords supplied with <code>--password</code> or <code>--password-file</code> are not checked by this creation/change flow. Set <code>security.warn_on_weak_existing_passwords = true</code> to also warn during <code>d2fa vault unlock</code>, including when those options provide the password. <code>--allow-weak-passwords</code> or <code>D2FA_ALLOW_WEAK_PASSWORDS=1</code> bypasses the interactive creation/change check.</p>
+    <p>In version 0.9.0, the public Python <code>Vault.save()</code> and <code>Vault.load()</code> API require an explicit, non-empty password. Vaults created by earlier API versions without a password cannot be opened through the 0.9.0 API. Before upgrading that API usage, use the previous release to open and re-save each such vault with a non-empty password. This does not affect vaults created through the normal CLI or Textual UI flows, which already require a non-empty password.</p>
     <p>There is no password reset or recovery key. Backups are encrypted with the vault password; create them before upgrades and store them separately and securely. A backup is not a substitute for remembering the password.</p>
 
     <h2>Review the source</h2>
     <p>For the full threat analysis and cryptographic details, see
       <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/docs/SECURITY.md">the upstream security documentation</a>.
-      Report security issues through the project's
-      <a href="https://github.com/wrogistefan/desktop-2fa/security">GitHub security page</a>.</p>
+      Report vulnerabilities privately to <a href="mailto:security@desktop-2fa.org">security@desktop-2fa.org</a>;
+      use the <a href="https://github.com/wrogistefan/desktop-2fa/security">GitHub security page</a> for security reporting guidance.
+      For general questions and support, email <a href="mailto:contact@desktop-2fa.org">contact@desktop-2fa.org</a>.</p>
   </div>
 </BaseLayout>
