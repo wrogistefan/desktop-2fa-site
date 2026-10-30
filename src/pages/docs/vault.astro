@@ -17,7 +17,7 @@ d2fa --vault ./work-vault vault path</code></pre>
     <h2>Create and access a vault</h2>
     <pre><code>d2fa vault init
 d2fa list</code></pre>
-    <p>When an entry-management command needs a missing vault, the CLI creates an encrypted vault and reports its path. In non-interactive use, provide a password with <code>--password</code> or <code>--password-file</code>. The early <code>d2fa ui</code> prototype does not create a missing vault.</p>
+    <p>Only <code>vault init</code>, <code>list</code> and <code>add</code> create missing vaults. Other content commands report a missing-vault error. A failed load never triggers creation. In non-interactive use, provide a password with <code>--password</code> or <code>--password-file</code>. The early <code>d2fa ui</code> prototype does not create a missing vault.</p>
 
     <h2>Password management</h2>
     <p>Use <code>d2fa vault unlock</code> to verify the password and <code>d2fa vault change-password</code> to change it. Interactive password creation and changes are evaluated with zxcvbn; by default weak passwords trigger a warning and confirmation, and configuration can reject them. See the <a href="/docs/security">security guide</a> for the scope of these checks.</p>
@@ -28,6 +28,12 @@ d2fa list</code></pre>
     <pre><code>d2fa backup</code></pre>
     <p>Use <code>d2fa export PATH</code> and <code>d2fa import PATH</code> to move a vault. Protect exported files and backups as carefully as the original vault.</p>
 
+    <p>Export preserves existing destinations unless explicitly given <code>--force</code>. Source aliases and destination symlinks are refused even with force. Import into a separate vault when checking recovery:</p>
+    <pre><code>d2fa export ./backup.d2fa
+d2fa --vault ./recovered-vault import ./backup.d2fa</code></pre>
+    <h2>Concurrent edits and compatibility</h2>
+    <p>Version 0.10.0 keeps the D2FA v1 format and cryptographic parameters unchanged. Saves reject stale revisions or busy publication locks with status 6: reload before retrying. Empty <code>.NAME.lock</code> sidecars intentionally remain beside vaults. File symlinks and multiply linked vault files are read-only.</p>
+    <p>Password files now preserve spaces and tabs and accept one UTF-8 line without a BOM. If an older password file relied on trimming, correct it to contain the actual previously used password; there is no automatic fallback or vault migration.</p>
     <h2>File handling and compatibility</h2>
     <p>The application accepts regular vault files up to 10 MiB and uses atomic replacement when saving. Normal CLI and Textual UI vault flows continue to require a non-empty password. However, the version 0.9.0 public Python API no longer opens vaults created by earlier API versions without a password. If this affects your vault, use the previous release to open it and re-save it with a non-empty password before upgrading; make a backup before migrating.</p>
     <p>See the upstream <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/README.md#vault-lifecycle">vault lifecycle notes</a> for current project guidance.</p>

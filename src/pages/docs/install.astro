@@ -16,6 +16,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>pipx installs the command-line application in an isolated environment:</p>
     <pre><code>pipx install desktop-2fa</code></pre>
 
+    <h2>Upgrade</h2>
+    <p>The current release is 0.10.0 (October 30, 2026). Create an encrypted backup before upgrading and review <a href="/docs/vault">compatibility notes</a>, especially password-file whitespace handling.</p>
+    <pre><code>d2fa backup
+python -m pip install --upgrade desktop-2fa</code></pre>
+    <p>For pipx installations, use <code>pipx upgrade desktop-2fa</code>.</p>
     <h2>Verify and get started</h2>
     <pre><code>d2fa --version
 d2fa --help
@@ -26,8 +31,7 @@ d2fa vault init</code></pre>
 cd desktop-2fa
 python -m pip install .</code></pre>
 
-    <p>See the <a href="/docs/cli">CLI reference</a> for commands and the
-      <a href="/docs/vault">vault guide</a> for backup and path options.</p>
+    <p>See the <a href="/docs/cli">CLI reference</a> for commands and the{' '}<a href="/docs/vault">vault guide</a> for backup and path options.</p>
     <p><a href="https://pypi.org/project/desktop-2fa/">PyPI project page</a> ·
       <a href="https://github.com/wrogistefan/desktop-2fa/releases">GitHub releases</a></p>
   </div>

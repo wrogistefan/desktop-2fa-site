@@ -534,3 +534,45 @@ tr:last-child td {
   opacity: 0.8;
   text-decoration: underline;
 }
+
+/* Shared spacing works without utility CSS. */
+.container > section + section,
+.documentation-nav {
+  margin-top: 64px;
+}
+.container > section { scroll-margin-top: 24px; }
+.documentation-nav { padding-top: 32px; border-top: 1px solid var(--color-border); }
+.documentation-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px 24px; }
+.documentation-links a { display: block; padding: 4px 0; }
+.footer-links { flex-wrap: wrap; gap: 10px 22px; }
+.footer-links a { overflow-wrap: anywhere; }
+.eyebrow { color: var(--color-accent); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+.muted { color: var(--color-text-muted); font-size: .9rem; }
+.watch-section { padding: 32px; border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent); border-radius: var(--radius-lg); background: var(--color-bg-elevated); }
+.watch-section h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.watch-section p:last-child { margin-bottom: 0; }
+.status-badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--color-border); border-radius: 999px; font-size: .75rem; letter-spacing: 0; color: var(--color-text-muted); }
+.screenshot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 24px 0; }
+.screenshot-card { margin: 0; min-width: 0; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-bg-elevated); }
+.screenshot-card > a { display: flex; align-items: center; background: #0c0e14; aspect-ratio: 16 / 10; padding: 8px; }
+.screenshot-card img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.screenshot-card figcaption { padding: 18px; }
+.screenshot-card h3 { font-size: 1rem; margin: 0 0 8px; }
+.screenshot-card p { font-size: .9rem; color: var(--color-text-muted); margin: 0; }
+dt { font-weight: 600; margin-top: 24px; }
+dd { margin: 8px 0 0; }
+code { color: var(--color-accent); overflow-wrap: anywhere; }
+pre { color: var(--color-text); }
+pre code { padding: 0; background: transparent; overflow-wrap: normal; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+@media (max-width: 600px) {
+  .screenshot-grid { grid-template-columns: 1fr; }
+  .watch-section { padding: 24px 20px; }
+  .container > section + section, .documentation-nav { margin-top: 48px; }
+  .hero-actions { max-width: 100%; }
+  .install-snippet { padding-inline: 8px; font-size: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-graphic { animation: none; }
+  .btn { transition: none; }
+}

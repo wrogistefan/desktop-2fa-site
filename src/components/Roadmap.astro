@@ -1,11 +1,12 @@
 <section aria-labelledby="status-heading">
   <h2 id="status-heading">Current project status</h2>
-  <p>Desktop-2FA is at version 0.9.0. The CLI is the primary interface; the
-    Textual terminal UI is explicitly an early prototype, not a full desktop GUI.</p>
+  <p>Desktop-2FA 0.10.0 was released on October 30, 2026. It remains free and open source under Apache 2.0. The CLI is the primary interface; Textual is an early terminal UI prototype.</p>
   <ul>
-    <li>CLI commands for vault, TOTP entries, backups, import/export, and password management</li>
-    <li>Early <code>d2fa ui</code> prototype for listing entries, generating codes, and copying them</li>
-    <li>Version 0.9.0 requires an explicit, non-empty password in the public Python vault API; see the <a href="/docs/security">security guide</a> before upgrading API-created vaults</li>
-    <li>See the <a href="/docs/changelog">upstream-synced changelog</a> and <a href="https://github.com/wrogistefan/desktop-2fa">source repository</a> for current development</li>
+    <li>Hidden secret input in interactive add, validated Base32 secrets and preservation of URI algorithm, digits and period</li>
+    <li>Exact account names take priority over unique issuer matches; ambiguous selections are refused</li>
+    <li>Encrypted export refuses overwrites by default; stale concurrent vault updates report a conflict</li>
+    <li>Consistent CLI exit statuses, JSON output for scripts and more accurate Textual code validity</li>
+    <li>D2FA v1 vault format and cryptographic parameters are unchanged; review <a href="/docs/vault">upgrade and compatibility notes</a></li>
   </ul>
+  <p>See the <a href="/docs/changelog">full changelog</a> and <a href="https://github.com/wrogistefan/desktop-2fa">source repository</a>. Work has also started on <a href="#watch">D2FA Watch for Wear OS</a>.</p>
 </section>

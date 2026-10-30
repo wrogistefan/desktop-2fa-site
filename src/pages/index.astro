@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import JsonLdSoftwareApp from '../components/JsonLdSoftwareApp.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Install from '../components/Install.astro';
@@ -12,6 +13,8 @@ import Comparison from '../components/Comparison.astro';
 import FAQ from '../components/FAQ.astro';
 import Roadmap from '../components/Roadmap.astro';
 import Footer from '../components/Footer.astro';
+import Watch from '../components/Watch.astro';
+import Screenshots from '../components/Screenshots.astro';
 import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
 ---
 
@@ -48,20 +51,7 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
   <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "desktop-2fa",
-    "applicationCategory": "SecurityApplication",
-    "operatingSystem": "Windows, macOS, Linux",
-    "description": "Offline TOTP authenticator with an AES-256-GCM encrypted local vault, CLI, and early Textual terminal UI.",
-    "url": "https://desktop-2fa.org/",
-    "softwareVersion": "0.9.0",
-    "license": "https://github.com/wrogistefan/desktop-2fa/blob/main/LICENSE",
-    "sourceCode": "https://github.com/wrogistefan/desktop-2fa"
-  }
-  </script>
+  <JsonLdSoftwareApp />
 </head>
 
 
@@ -72,6 +62,8 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
 
         <div class="container">
           <Hero />
+          <Screenshots />
+          <Watch />
           <Install />
           <Features />
           <HowItWorks />
@@ -81,8 +73,8 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
           <Comparison />
           <FAQ />
           <Roadmap />
-          <Footer />
           <AfterFooterDocsLinks />
+          <Footer />
         </div>
       </main>
     </div>

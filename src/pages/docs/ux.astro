@@ -13,17 +13,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>Commands use <code>~/.desktop-2fa/vault</code> by default. Choose a different file with the global <code>--vault</code> option or set <code>DESKTOP_2FA_VAULT</code>. The command-line option takes precedence.</p>
 
     <h2>Vault creation</h2>
-    <p>When an entry-management command needs a vault and none exists, the CLI requests or receives a password, creates an encrypted vault, and prints a confirmation with its path. In non-interactive use, supply <code>--password</code> or <code>--password-file</code>.</p>
+    <p>Only <code>vault init</code>, <code>list</code> and <code>add</code> create a missing vault. Other content commands report a missing-vault error; a failed load never triggers creation. In non-interactive use, supply <code>--password</code> or <code>--password-file</code>.</p>
     <p>The <code>d2fa ui</code> prototype does not create missing vaults.</p>
 
     <h2>Authentication and passwords</h2>
     <p>Commands that access vault contents require a password. Weak passwords are evaluated with zxcvbn and can be warned about or rejected through configuration. Password changes are managed with <code>d2fa vault change-password</code>.</p>
 
+    <h2>Entry selection and terminal UI</h2>
+    <p>Code, remove and rename use case-sensitive exact account names before a unique issuer fallback. Ambiguous matches fail with status 6. Rename refuses an occupied destination; <code>list --indices</code> and <code>rename OLD NEW --index N</code> support explicit repair of legacy duplicates.</p>
+    <p>Textual shows validity using the selected account's actual period. Expired codes are cleared, changing selection clears the previous result, and copied-code feedback shows the current value and remaining validity. Entry management remains in the CLI.</p>
     <h2>Errors and state changes</h2>
     <p>The CLI distinguishes missing vaults from filesystem permission failures, validates vault files before loading, and uses atomic replacement for saves. Check the command output and exit status before assuming an operation succeeded.</p>
 
-    <p>These details can evolve; the <a href="/docs/changelog">changelog</a> and
-      <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/README.md">upstream README</a>
-      are the source of truth.</p>
+    <p>These details can evolve; the <a href="/docs/changelog">changelog</a> and{' '}<a href="https://github.com/wrogistefan/desktop-2fa/blob/main/README.md">upstream README</a>{' '}are the source of truth.</p>
   </div>
 </BaseLayout>

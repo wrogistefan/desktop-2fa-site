@@ -13,11 +13,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <pre><code># Create a vault
 d2fa vault init
 
-# Add an entry (the secret below is an example)
-d2fa add GitHub GitHub JBSWY3DPEHPK3PXP
+# Add an entry interactively (hidden Secret prompt)
+d2fa add
 
 # List entries and generate a code
-d2fa list
+d2fa list --indices
 d2fa code GitHub
 
 # Copy the generated code to the clipboard
@@ -37,6 +37,21 @@ d2fa vault path</code></pre>
       <li><code>ui</code> — launch the early Textual terminal UI prototype.</li>
     </ul>
 
+    <h2>Adding accounts and selecting entries</h2>
+    <p>Interactive <code>d2fa add</code> hides input at the dedicated Secret prompt. Enter a plain issuer there first: the issuer prompt remains visible. Secrets or full URIs passed as command arguments can appear in shell history or process inspection.</p>
+    <p>URI add preserves algorithm, digits and period. Quote the entire URI so the shell preserves ampersands. This example uses a public synthetic secret:</p>
+    <pre><code>d2fa add "otpauth://totp/Example:demo?secret=JBSWY3DPEHPK3PXP&amp;issuer=Example&amp;algorithm=SHA256&amp;digits=8&amp;period=60"</code></pre>
+    <p>Names are case-sensitive. An exact account name takes priority; otherwise a unique issuer match is accepted. Ambiguous matches fail with status 6. For legacy duplicates, run <code>d2fa list --indices</code>, then <code>d2fa rename OLD NEW --index N</code>. The index is one-based and changes when list order changes. Rename updates both account name and issuer and refuses an occupied account name.</p>
+
+    <h2>Output and exit statuses</h2>
+    <p><code>code --json</code> writes one success or error object to stdout. <code>--raw</code> prints only the code on success. Diagnostics and password prompts use stderr. <code>--quiet</code> suppresses both streams and requires a supplied password or password file; the exit status is preserved.</p>
+    <ul>
+      <li><code>0</code>: success; <code>1</code>: filesystem, corrupted data or unsupported format failure.</li>
+      <li><code>2</code>: authentication failure; <code>3</code>: missing entry; <code>4</code>: missing vault.</li>
+      <li><code>5</code>: clipboard failure; <code>6</code>: validation failure, ambiguity, refused overwrite or write conflict.</li>
+    </ul>
+    <p>CLI import/export uses encrypted D2FA v1 files. External-format Python adapters are separate helpers, not CLI import modes. Export preserves an existing destination unless <code>--force</code> is supplied; source aliases and destination symlinks are refused even with force.</p>
+
     <h2>Global options</h2>
     <ul>
       <li><code>--vault PATH</code> — select a vault file; place this before the command.</li>
@@ -50,6 +65,8 @@ d2fa vault path</code></pre>
     <h2>Non-interactive use</h2>
     <p>For scripts, prefer <code>--password-file</code> to avoid putting a password in shell history or process arguments. Protect the password file with appropriate filesystem permissions.</p>
     <pre><code>d2fa --password-file /path/to/passphrase.txt list</code></pre>
+
+    <p>Password files contain exactly one UTF-8 line without a BOM. Only one optional final LF or CRLF is removed; spaces and tabs remain significant. Empty, multiline, bare-CR, BOM and invalid UTF-8 input is rejected. Older files relying on automatic trimming may need to be corrected to contain the actual password previously used.</p>
 
     <h2>Textual UI status</h2>
     <p><code>d2fa ui</code> is an early prototype. It can list vault entries, generate codes, and copy codes. It does not manage entries or create a missing vault. The CLI remains the primary interface.</p>

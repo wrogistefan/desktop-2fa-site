@@ -1,0 +1,27 @@
+---
+const captures = [
+  { file: 'interactive', width: 994, height: 368, title: 'Add an account privately', description: 'The dedicated Secret prompt hides your input. Account name and issuer remain visible.' },
+  { file: 'accounts', width: 994, height: 416, title: 'Your vault, your accounts', description: 'Create a vault and list accounts with one-based indices for duplicate recovery.' },
+  { file: 'codes', width: 994, height: 416, title: 'Codes for people and scripts', description: 'Human-readable, raw and JSON output from the same offline authenticator.' },
+  { file: 'rename', width: 994, height: 319, title: 'Predictable account management', description: 'Rename entries with explicit collision refusal to preserve existing accounts.' },
+  { file: 'recovery', width: 994, height: 514, title: 'Encrypted backup and recovery', description: 'Export refuses an existing destination; recovery imports into a separate vault.' },
+  { file: 'textual', width: 1238, height: 782, title: 'An early terminal interface', description: 'The Textual prototype lists accounts and generates or copies codes. Manage entries with the CLI.' },
+];
+---
+<section id="screenshots" aria-labelledby="screenshots-heading">
+  <p class="eyebrow">From the 0.10.0 release tests</p>
+  <h2 id="screenshots-heading">See Desktop-2FA in action</h2>
+  <p>Real command output with synthetic accounts and credentials. Terminal frames are rendered from captured output; Textual is captured using its headless driver.</p>
+  <div class="screenshot-grid">
+    {captures.map(({ file, title, description, width, height }) => (
+      <figure class="screenshot-card">
+        <a href={`/screenshots/release-0.10.0/${file}.png`} aria-label={`Open full-size screenshot: ${title}`}>
+          <img src={`/screenshots/release-0.10.0/${file}.png`} alt={title} width={width} height={height} loading="lazy" decoding="async" />
+        </a>
+        <figcaption><h3>{title}</h3><p>{description}</p></figcaption>
+      </figure>
+    ))}
+  </div>
+  <p class="muted">Select an image to view it full size. Clipboard checks used a stub; these captures do not demonstrate the system clipboard or native UI behavior on every OS.</p>
+  <p><a href="https://github.com/wrogistefan/desktop-2fa/blob/7d1089d6bee0f3f82678ca8a13988c742840fba0/assets/screenshots/release-0.10.0/README.md">Capture method and limitations</a> · <a href="/screenshots/release-0.10.0/report.json">Test campaign report (JSON)</a></p>
+</section>

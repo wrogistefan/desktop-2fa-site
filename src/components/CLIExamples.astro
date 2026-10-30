@@ -4,14 +4,18 @@
 
 <section aria-labelledby="cli-examples-heading">
   <h2 id="cli-examples-heading">CLI examples</h2>
-  <pre><code># Add a new entry (example secret)
-d2fa add GitHub GitHub JBSWY3DPEHPK3PXP
+  <pre><code># Add an entry using the hidden Secret prompt
+d2fa add
 
 # Generate a code
 d2fa code GitHub --copy
 
-# List entries
-d2fa list
+# List entries with indices
+d2fa list --indices
+
+# Output for scripts
+d2fa code GitHub --json
+d2fa code GitHub --raw
 
 # Create an encrypted backup
 d2fa backup</code></pre>

@@ -8,10 +8,10 @@
   <pre><code>python -m pip install desktop-2fa</code></pre>
   <p>Or install the command-line app with pipx:</p>
   <pre><code>pipx install desktop-2fa</code></pre>
-  <p>Basic usage:</p>
+  <p>Basic usage (interactive add hides input at the dedicated Secret prompt):</p>
   <pre><code># Create a vault and add a TOTP entry
 d2fa vault init
-d2fa add GitHub GitHub JBSWY3DPEHPK3PXP
+d2fa add
 
 # Generate a code
 d2fa code GitHub

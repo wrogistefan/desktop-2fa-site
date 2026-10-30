@@ -28,11 +28,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <h2>Can I add an otpauth URL or scan a QR code?</h2>
     <p>The CLI accepts <code>otpauth://</code> URLs with <code>d2fa add</code>. QR scanning is not listed as a current feature.</p>
 
+    <h2>What is D2FA Watch?</h2>
+    <p>A separate Wear OS app in development. The current MVP can create a vault, add accounts manually and generate TOTP codes on the watch. Managing accounts on a computer and securely transferring selected ones without cloud sync is planned; the transfer workflow is still being designed. Desktop-2FA remains free and open source. Watch is planned as a separate paid app. See <a href="/#watch">the Watch development update</a>.</p>
+
     <h2>What Python version do I need?</h2>
     <p>Python 3.11 or newer.</p>
 
     <h2>Where can I find command help or report a problem?</h2>
-    <p>Run <code>d2fa --help</code> or <code>d2fa COMMAND --help</code>. Report issues in the
-      <a href="https://github.com/wrogistefan/desktop-2fa/issues">GitHub issue tracker</a>.</p>
+    <p>Run <code>d2fa --help</code> or <code>d2fa COMMAND --help</code>. Report issues in the{' '}<a href="https://github.com/wrogistefan/desktop-2fa/issues">GitHub issue tracker</a>.</p>
   </div>
 </BaseLayout>

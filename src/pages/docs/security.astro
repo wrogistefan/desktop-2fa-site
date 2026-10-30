@@ -16,6 +16,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li><strong>zxcvbn</strong> evaluates passwords during interactive vault creation and password changes. By default, weak passwords trigger a warning and confirmation; configuration can reject them.</li>
       <li>Vault access requires password authentication; the application does not rely on a persistent unlocked session.</li>
       <li>Vault loading is limited to regular files of at most 10 MiB, and saves use atomic replacement.</li>
+      <li>Stale concurrent writes are refused under a short OS publication lock. Unknown payload versions and fields are rejected before rewriting; version 0.10.0 keeps the D2FA v1 format and cryptographic parameters unchanged.</li>
     </ul>
 
     <h2>What this does not protect against</h2>
@@ -27,8 +28,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>There is no password reset or recovery key. Backups are encrypted with the vault password; create them before upgrades and store them separately and securely. A backup is not a substitute for remembering the password.</p>
 
     <h2>Review the source</h2>
-    <p>For the full threat analysis and cryptographic details, see
-      <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/docs/SECURITY.md">the upstream security documentation</a>.
+    <p>For the full threat analysis and cryptographic details, see{' '}<a href="https://github.com/wrogistefan/desktop-2fa/blob/main/docs/SECURITY.md">the upstream security documentation</a>.
       Report vulnerabilities privately to <a href="mailto:security@desktop-2fa.org">security@desktop-2fa.org</a>;
       use the <a href="https://github.com/wrogistefan/desktop-2fa/security">GitHub security page</a> for security reporting guidance.
       For general questions and support, email <a href="mailto:contact@desktop-2fa.org">contact@desktop-2fa.org</a>.</p>

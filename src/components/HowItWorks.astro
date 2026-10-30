@@ -9,7 +9,7 @@
   <p>Use the default local vault or select another path with <code>--vault</code> or <code>DESKTOP_2FA_VAULT</code>.</p>
 
   <h3>2. Add TOTP entries</h3>
-  <p>Use <code>d2fa add</code> to store an account's TOTP secret in the encrypted vault.</p>
+  <p>Use <code>d2fa add</code> and enter a plain issuer name followed by the hidden secret. Provisioning URIs are also supported, preserving algorithm, digits and period.</p>
 
   <h3>3. Generate and copy codes</h3>
   <p>Run <code>d2fa code &lt;name&gt;</code>; use <code>--copy</code> or <code>--copy-only</code> to copy the code.</p>
