@@ -19,8 +19,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li>Stale concurrent writes are refused under a short OS publication lock. Unknown payload versions and fields are rejected before rewriting; version 0.11.0 keeps the D2FA v1 format and cryptographic parameters unchanged.</li>
     </ul>
 
+    <h2>Local-first operation</h2>
+    <p>After installation and account setup, opening a vault and generating codes require no cloud service or network connection. There is no automatic cloud synchronization or hosted recovery service. You decide where to store and transfer encrypted desktop backups.</p>
+
     <h2>What this does not protect against</h2>
-    <p>Encryption does not protect a vault after it has been unlocked on a compromised device. Desktop-2FA cannot defend against malware or a compromised operating system, physical observation, or unsafe handling of exported backups. Keep your operating system and dependencies trusted, protect the device, and store backups securely.</p>
+    <p>Encryption does not protect a vault after it has been unlocked on a compromised device. Desktop-2FA cannot defend against malware or a compromised operating system, physical observation, or unsafe handling of exported backups. Clipboard observers and phishing are outside these protections; TOTP does not provide phishing resistance. Vault encryption cannot prevent offline password guessing. Keep your operating system and dependencies trusted, protect the device, and store backups securely.</p>
 
     <h2>Password and backup responsibilities</h2>
     <p>Interactive vault creation and password changes treat zxcvbn scores below 3 as weak. By default, the app warns and asks for confirmation; set <code>security.reject_weak_passwords = true</code> in <code>~/.config/d2fa/config.toml</code> to reject them. Passwords supplied with <code>--password</code> or <code>--password-file</code> are not checked by this creation/change flow. Set <code>security.warn_on_weak_existing_passwords = true</code> to also warn during <code>d2fa vault unlock</code>, including when those options provide the password. <code>--allow-weak-passwords</code> or <code>D2FA_ALLOW_WEAK_PASSWORDS=1</code> bypasses the interactive creation/change check.</p>

@@ -17,7 +17,7 @@ system desktop capture. Textual exports its actual headless screen.
 | [codes.png](codes.png) | Human-readable, raw and JSON output |
 | [rename.png](rename.png) | Rename and collision refusal |
 | [recovery.png](recovery.png) | Backup, encrypted export, overwrite refusal, import |
-| [textual.png](textual.png) | Mounted Textual prototype with synthetic accounts |
+| [textual.png](textual.png) | Mounted Textual interface with synthetic accounts |
 
 ## Reproduce
 

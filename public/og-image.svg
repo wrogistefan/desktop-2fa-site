@@ -118,7 +118,7 @@
      font-size="36"
      font-family="Segoe UI, sans-serif"
      id="text4">
-        Offline TOTP authenticator
+        Local-first authentication
     </text>
   <text
      x="520"

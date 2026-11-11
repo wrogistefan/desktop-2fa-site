@@ -1,16 +1,12 @@
-<!--
-  Security model section
--->
-
-<section aria-labelledby="security-model-heading">
+<section id="security" aria-labelledby="security-model-heading">
   <h2 id="security-model-heading">Security model</h2>
   <ul>
-    <li>AES-256-GCM authenticated encryption protects vault contents.</li>
-    <li>Argon2id derives encryption keys from passwords (time cost 4, memory cost 128 MiB, parallelism 2).</li>
-    <li>zxcvbn evaluates passwords; weak-password warnings or rejection can be configured.</li>
-    <li>CLI content commands authenticate independently. Textual keeps a decrypted session until locking or exit; writes, backup and export ask for a password again.</li>
-    <li>The UI locks manually or after five minutes without input. Python cannot guarantee erasure of copies from memory.</li>
+    <li><strong>Argon2id key derivation.</strong> Desktop-2FA derives a 256-bit encryption key from your password with a time cost of 4, 128 MiB of memory and parallelism of 2. Each save uses a fresh random salt.</li>
+    <li><strong>AES-256-GCM authenticated encryption.</strong> Vault contents are encrypted with a fresh random nonce on each save. Invalid passwords, damaged ciphertext and failed authentication are rejected.</li>
+    <li><strong>Local-first operation.</strong> Opening the vault and generating codes require no cloud service or network connection after installation and account setup. There is no automatic cloud synchronization or hosted password recovery. You control where encrypted backups are stored.</li>
+    <li><strong>Session boundaries.</strong> CLI content commands authenticate independently. The terminal UI holds decrypted account data while unlocked, requests the password again for writes, backup and export, and locks manually or after five minutes without input.</li>
   </ul>
-  <p>Desktop-2FA does not protect secrets on a compromised device or while they are in use.
-    See the{' '}<a href="/docs/security">security model and threat limits</a>.</p>
+  <p><strong>Threat model.</strong> Vault encryption protects stored contents against access without the password, subject to password strength and offline guessing. It does not protect an unlocked session on a compromised device, clipboard contents or secrets captured while in use. Python cannot guarantee erasure of secret copies from memory. TOTP codes do not provide phishing resistance.</p>
+  <p><strong>Recovery is your responsibility.</strong> Keep encrypted desktop backups, the vault password and provider recovery codes. There is no password reset service. Watch has separate session behavior and currently has no user-facing backup or export.</p>
+  <p><a href="/docs/security">Read the security model and platform limits</a></p>
 </section>

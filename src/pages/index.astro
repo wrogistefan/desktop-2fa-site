@@ -2,7 +2,8 @@
 import '../styles/global.css';
 import JsonLdSoftwareApp from '../components/JsonLdSoftwareApp.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
+import Ecosystem from '../components/Ecosystem.astro';
+import Architecture from '../components/Architecture.astro';
 import TerminalUI from '../components/TerminalUI.astro';
 import Install from '../components/Install.astro';
 import Features from '../components/Features.astro';
@@ -25,24 +26,24 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>desktop‑2fa — Offline TOTP Authenticator</title>
+  <title>Desktop-2FA — Own your keys. Own your codes.</title>
 
-  <meta name="description" content="Offline TOTP authenticator with an encrypted local vault, a full CLI, and an complete Textual terminal UI. No cloud sync.">
+  <meta name="description" content="Desktop-2FA is the foundation of a local-first authentication ecosystem that keeps your TOTP secrets under your control.">
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Łukasz Perek" />
   <meta name="theme-color" content="#0f172a" />
 
   <!-- OpenGraph -->
-  <meta property="og:title" content="desktop‑2fa — Offline TOTP Authenticator" />
-  <meta property="og:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and complete Textual terminal UI." />
+  <meta property="og:title" content="Desktop-2FA — Own your keys. Own your codes." />
+  <meta property="og:description" content="Desktop-2FA is the foundation of a local-first authentication ecosystem that keeps your TOTP secrets under your control." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://desktop-2fa.org/og-image.svg" />
   <meta property="og:url" content="https://desktop-2fa.org/" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="desktop‑2fa — Offline TOTP Authenticator" />
-  <meta name="twitter:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and complete Textual terminal UI." />
+  <meta name="twitter:title" content="Desktop-2FA — Own your keys. Own your codes." />
+  <meta name="twitter:description" content="Desktop-2FA is the foundation of a local-first authentication ecosystem that keeps your TOTP secrets under your control." />
   <meta name="twitter:image" content="https://desktop-2fa.org/og-image.svg" />
 
   <!-- Canonical -->
@@ -62,7 +63,8 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
         <Header showcase />
 
         <div class="container">
-          <Hero />
+          <Ecosystem />
+          <Architecture />
           <TerminalUI />
           <Screenshots />
           <Watch />

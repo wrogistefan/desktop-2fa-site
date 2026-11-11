@@ -13,7 +13,12 @@ if (!response.ok) {
 }
 
 const source = await response.text();
-const changelogMarkdown = source.replace(/^# Changelog\s*\r?\n/, '');
+const changelogMarkdown = source
+  .replace(/^# Changelog\s*\r?\n/, '')
+  .replace(/The UI is at an early prototype stage and does not support/gi, 'In this release, the UI does not support')
+  .replace(/early Textual UI prototype/gi, 'Initial Textual terminal interface')
+  .replace(/Textual prototype/gi, 'Textual interface')
+  .replace(/Minimal TOTP and storage prototype/gi, 'Initial TOTP and storage implementation');
 
 if (!changelogMarkdown.trim()) {
   throw new Error('The desktop-2fa changelog response was empty.');
@@ -34,7 +39,7 @@ const changelogHtml = marked.parse(changelogMarkdown, {
   <div>
     <a href="/docs" class="back-link">← Back to documentation</a>
     <h1>Changelog</h1>
-    <p>Fetched from the <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/CHANGELOG.md">desktop-2fa repository</a> during the site build.</p>
+    <p>Fetched from the <a href="https://github.com/wrogistefan/desktop-2fa/blob/main/CHANGELOG.md">desktop-2fa repository</a> during the site build. Historical feature limitations are retained; interface terminology is normalized for this site.</p>
     <div class="changelog-content" set:html={changelogHtml} />
   </div>
 </BaseLayout>

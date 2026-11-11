@@ -1,0 +1,14 @@
+<section id="architecture" aria-labelledby="architecture-heading">
+  <p class="eyebrow">Shared responsibilities</p>
+  <h2 id="architecture-heading">Architecture</h2>
+  <p>Desktop-2FA separates encrypted storage, cryptography and code generation from its interfaces. The CLI and terminal UI use the same Python core and the same local vault.</p>
+  <h3>Core Components</h3>
+  <div class="architecture-grid">
+    <article><h3>Vault</h3><p>Stores accounts and their TOTP parameters in an encrypted local file. Validates data and writes through a temporary file before replacing the destination.</p></article>
+    <article><h3>Crypto</h3><p>Derives a 256-bit key from your password with Argon2id. AES-256-GCM encrypts vault contents and detects changes to authenticated ciphertext.</p></article>
+    <article><h3>TOTP Engine</h3><p>Generates time-based codes using RFC 6238. Preserves each account’s algorithm, digit count and period across storage and import.</p></article>
+    <article><h3>Interfaces</h3><p>The CLI supports commands and scripts. The Textual terminal UI adds forms, account selection and live countdowns without introducing a separate desktop vault format.</p></article>
+  </div>
+  <p><strong>Shared architecture across the ecosystem.</strong> CLI, terminal UI, Watch and future clients follow the same core responsibilities: Vault, Crypto and TOTP Engine. D2FA Watch implements these components independently in Kotlin; it does not run the Python core. Future clients and desktop-to-watch transfer are planned extensions, not current integrations.</p>
+  <p class="section-links"><a href="/docs/vault">Vault format</a><a href="/docs/security">Security boundaries</a><a href="https://github.com/wrogistefan/desktop-2fa">Desktop source</a></p>
+</section>
