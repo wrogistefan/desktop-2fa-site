@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import report from '../../../public/screenshots/textual-ui/report.json';
+
+const labels: Record<string, string> = {
+  create: 'Create an encrypted vault',
+  'automatic refresh across period boundary without clipboard writes': 'Refresh an expired code automatically without writing to the clipboard',
+  'copy-only with synthetic clipboard stub': 'Copy-only mode with a simulated clipboard',
+  backup: 'Create an encrypted backup',
+  export: 'Export an encrypted vault',
+  'change-password': 'Change the vault password',
+  rename: 'Rename the selected account',
+  remove: 'Remove the selected account',
+  import: 'Import an encrypted D2FA vault',
+  'manual lock removes accounts and displayed code': 'Clear accounts and codes when manually locking',
+  unlock: 'Unlock the vault again',
+  'filtered selection retains original row identity': 'Keep the correct account selected when filtering',
+  'five-minute inactivity lock using a controlled monotonic deadline': 'Lock after five minutes without input, tested with a controlled deadline',
+};
+---
+
+<BaseLayout title="UI test summary">
+  <article aria-labelledby="report-heading">
+    <a href="/#screenshots" class="back-link">← Back to screenshots</a>
+    <p class="eyebrow">Desktop-2FA {report.version} · Capture campaign</p>
+    <h1 id="report-heading">How we checked the terminal UI</h1>
+    <p><strong>{report.passed} checks passed</strong> in the synthetic campaign used to produce these screenshots. The campaign ran on {report.platform} with Python {report.python}. This is a record of that run, not a live test status or a security audit.</p>
+
+    <h2>What was exercised</h2>
+    <ol>
+      {report.cases.map((name, index) => <li>{name === 'add' ? (index === 1 ? 'Add an account manually' : 'Add an account from a provisioning URI') : (labels[name] ?? name)}</li>)}
+    </ol>
+
+    <h2>How the screenshots were made</h2>
+    <p>The released 0.11.0 application ran with temporary synthetic accounts, passwords and setup keys. No real user vault was used. A controlled clock made countdowns repeatable. Textual’s headless driver exported SVG screens, which a local browser rendered as PNG images.</p>
+    <p>The decorative terminal frame identifies version 0.11.0; it is not a native operating-system window. The campaign produced nine captures. Three are used on this website:</p>
+    <ul>
+      <li><a href="/screenshots/textual-ui/03-accounts.png">Account dashboard and live countdown</a></li>
+      <li><a href="/screenshots/textual-ui/04-add-account.png">Add-account form</a></li>
+      <li><a href="/screenshots/textual-ui/05-code-expiring.png">Code approaching expiry</a></li>
+    </ul>
+
+    <h2>What this run does not establish</h2>
+    <p>The clipboard was replaced with a test stub, so this campaign does not verify the system clipboard. Headless screenshots do not prove native terminal rendering or behavior on every operating system. This Windows run is not evidence of macOS/Linux testing; those platforms have separate CI checks.</p>
+    <p>Passing tests do not certify security or guarantee removal of secrets from memory. See the <a href="/docs/security">security model and limitations</a>.</p>
+
+    <h2>Source data</h2>
+    <p><a href="/screenshots/textual-ui/report.json" download="desktop-2fa-0.11.0-ui-report.json">Download raw test data (JSON)</a> · <a href="https://github.com/wrogistefan/desktop-2fa/blob/v0.11.0/assets/screenshots/textual-ui/README.md">Upstream capture methods</a></p>
+  </article>
+</BaseLayout>
