@@ -3,6 +3,7 @@ import '../styles/global.css';
 import JsonLdSoftwareApp from '../components/JsonLdSoftwareApp.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import TerminalUI from '../components/TerminalUI.astro';
 import Install from '../components/Install.astro';
 import Features from '../components/Features.astro';
 import HowItWorks from '../components/HowItWorks.astro';
@@ -26,14 +27,14 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
 
   <title>desktop‑2fa — Offline TOTP Authenticator</title>
 
-  <meta name="description" content="Offline TOTP authenticator with an encrypted local vault, a full CLI, and an early Textual terminal UI. No cloud sync.">
+  <meta name="description" content="Offline TOTP authenticator with an encrypted local vault, a full CLI, and an complete Textual terminal UI. No cloud sync.">
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Łukasz Perek" />
   <meta name="theme-color" content="#0f172a" />
 
   <!-- OpenGraph -->
   <meta property="og:title" content="desktop‑2fa — Offline TOTP Authenticator" />
-  <meta property="og:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and early Textual terminal UI." />
+  <meta property="og:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and complete Textual terminal UI." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://desktop-2fa.org/og-image.svg" />
   <meta property="og:url" content="https://desktop-2fa.org/" />
@@ -41,7 +42,7 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="desktop‑2fa — Offline TOTP Authenticator" />
-  <meta name="twitter:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and early Textual terminal UI." />
+  <meta name="twitter:description" content="An offline TOTP authenticator with an encrypted local vault, full CLI, and complete Textual terminal UI." />
   <meta name="twitter:image" content="https://desktop-2fa.org/og-image.svg" />
 
   <!-- Canonical -->
@@ -58,10 +59,11 @@ import AfterFooterDocsLinks from "../components/AfterFooterDocsLinks.astro";
   <body>
     <div class="page">
       <main class="page-main">
-        <Header />
+        <Header showcase />
 
         <div class="container">
           <Hero />
+          <TerminalUI />
           <Screenshots />
           <Watch />
           <Install />

@@ -8,8 +8,8 @@
     <li>AES-256-GCM authenticated encryption protects vault contents.</li>
     <li>Argon2id derives encryption keys from passwords (time cost 4, memory cost 128 MiB, parallelism 2).</li>
     <li>zxcvbn evaluates passwords; weak-password warnings or rejection can be configured.</li>
-    <li>Vault contents require password authentication; there are no session-based unlocks.</li>
-    <li>Vault files and backups remain local; there is no cloud sync or password recovery.</li>
+    <li>CLI content commands authenticate independently. Textual keeps a decrypted session until locking or exit; writes, backup and export ask for a password again.</li>
+    <li>The UI locks manually or after five minutes without input. Python cannot guarantee erasure of copies from memory.</li>
   </ul>
   <p>Desktop-2FA does not protect secrets on a compromised device or while they are in use.
     See the{' '}<a href="/docs/security">security model and threat limits</a>.</p>

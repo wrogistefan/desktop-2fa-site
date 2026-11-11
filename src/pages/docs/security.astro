@@ -14,9 +14,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li><strong>AES-256-GCM</strong> provides authenticated encryption for vault contents.</li>
       <li><strong>Argon2id</strong> derives a key from the vault password. Published parameters: time cost 4, memory cost 128 MiB, parallelism 2.</li>
       <li><strong>zxcvbn</strong> evaluates passwords during interactive vault creation and password changes. By default, weak passwords trigger a warning and confirmation; configuration can reject them.</li>
-      <li>Vault access requires password authentication; the application does not rely on a persistent unlocked session.</li>
+      <li>CLI content commands authenticate independently. Textual holds a decrypted session until manual lock, five minutes without input or exit; writes, backup and export ask for a password again. Python does not guarantee memory erasure.</li>
       <li>Vault loading is limited to regular files of at most 10 MiB, and saves use atomic replacement.</li>
-      <li>Stale concurrent writes are refused under a short OS publication lock. Unknown payload versions and fields are rejected before rewriting; version 0.10.0 keeps the D2FA v1 format and cryptographic parameters unchanged.</li>
+      <li>Stale concurrent writes are refused under a short OS publication lock. Unknown payload versions and fields are rejected before rewriting; version 0.11.0 keeps the D2FA v1 format and cryptographic parameters unchanged.</li>
     </ul>
 
     <h2>What this does not protect against</h2>

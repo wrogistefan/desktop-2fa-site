@@ -1,8 +1,30 @@
 <section id="watch" class="watch-section" aria-labelledby="watch-heading">
-  <p class="eyebrow">Next on the wrist · Wear OS</p>
-  <h2 id="watch-heading">D2FA Watch <span class="status-badge">In development</span></h2>
-  <p>An offline authenticator for Wear OS. The current MVP lets you create a vault, add accounts manually and generate TOTP codes directly on your watch.</p>
-  <p>We're working towards managing accounts on your computer and securely transferring selected ones to the watch, without cloud sync. That transfer workflow is still being designed.</p>
-  <p><strong>Desktop-2FA remains free and open source.</strong> The Watch app is planned as a separate paid app.</p>
-  <p class="muted">The Watch app is in development; there is no download available here yet.</p>
+  <p class="eyebrow">D2FA Watch · Wear OS · Development update</p>
+  <h2 id="watch-heading">Your codes, one glance away. <span class="status-badge">0.3.0 development milestone</span></h2>
+  <p class="watch-intro">An offline authenticator on your wrist. Read a code without reaching for your phone or opening your computer. The watch runs on its own, without an account, cloud service or required phone companion.</p>
+  <div class="watch-layout">
+    <div>
+      <h3>Working in the current MVP</h3>
+      <ul class="watch-progress">
+        <li><strong>Live codes and countdowns.</strong> A scrolling, round-screen interface keeps accounts within reach.</li>
+        <li><strong>Guided setup.</strong> Add service, account and setup key one field at a time, with validation and Back/Cancel controls.</li>
+        <li><strong>Password-only sessions.</strong> Unlock each session yourself. Lock manually, on screen off/device lock, when the app stops, or after 60 seconds without input.</li>
+        <li><strong>Real-device progress.</strong> The 0.3.0 milestone includes Galaxy Watch Ultra checks and pinned Python ↔ Kotlin vault round-trip tests.</li>
+      </ul>
+    </div>
+    <figure class="watch-preview">
+      <img src="/screenshots/watch-0.3.0/accounts.png" alt="Wear OS emulator showing synthetic account cards with live TOTP countdowns" width="454" height="454" loading="lazy" decoding="async" />
+      <img src="/screenshots/watch-0.3.0/account-wizard.png" alt="Wear OS guided setup with a single service-name field" width="454" height="454" loading="lazy" decoding="async" />
+      <figcaption>Original emulator captures · Synthetic accounts</figcaption>
+    </figure>
+  </div>
+  <div class="watch-next">
+    <span class="status-badge">Planned · Not available yet</span>
+    <h3>Set up on desktop. Choose what goes to your watch.</h3>
+    <p>The goal is to select accounts on your computer, preview them on the watch and explicitly accept their addition. Less typing on a small screen, without transferring your entire vault or its password.</p>
+    <p>Selected-account packages and confirmation/retry rules are being designed. Computer-to-watch transfer is not available yet. The current Watch app has no import/export or automatic synchronization.</p>
+  </div>
+  <p class="muted">Development evidence covers one Galaxy Watch Ultra and controlled tests, not every Wear OS device. Interoperability tests pin Desktop 0.10.0; they are not a tested 0.11.0 transfer workflow. Keep provider recovery codes: Watch has no user-facing backup/export yet.</p>
+  <p><strong>Desktop-2FA stays free and open source.</strong> Watch is planned as a separate paid app; this is a development update, not a store-launch announcement.</p>
+  <p class="section-links"><a href="https://github.com/wrogistefan/desktop-2fa-watch/tree/v0.3.0">0.3.0 milestone</a><a href="https://github.com/wrogistefan/desktop-2fa-watch/blob/v0.3.0/docs/testing/physical-watch-2026-11-11.md">Physical-device evidence</a><a href="https://github.com/wrogistefan/desktop-2fa-watch/blob/v0.3.0/docs/transfer/package-v1.md">Transfer design</a></p>
 </section>

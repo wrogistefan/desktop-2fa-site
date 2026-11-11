@@ -15,12 +15,17 @@ The changelog page fetches `CHANGELOG.md` from the
 
 ## Content baseline
 
-The site describes Desktop-2FA 0.10.0 (released 2026-10-30). The D2FA Watch
-section is a development announcement: desktop-to-watch transfer is still
-being designed, and Watch is planned as a separate paid app.
+The site describes Desktop-2FA 0.11.0 (v0.11.0, commit
+6457b420213f9bdc11fa5902b3bad5dc1792a75d) and Watch 0.3.0 (v0.3.0,
+commit 187f8216510f6ebbb7806fe74db171d3f75975fe).
 
-Release screenshots in `public/screenshots/release-0.10.0/` were downloaded
-from upstream commit `7d1089d6bee0f3f82678ca8a13988c742840fba0`.
-The included upstream README and report describe synthetic data, capture
-methods, and test limitations. Refresh images and captions together when
-updating the release baseline.
+The desktop Textual UI is available now. Watch is a standalone development MVP;
+selected-account transfer has a proposed contract but no transport/receiver/UI.
+Its interoperability evidence pins Desktop 0.10.0, not 0.11.0. Paid Watch
+positioning is planned, with no store-launch claim.
+
+Selected synthetic terminal captures are in public/screenshots/textual-ui/;
+Watch emulator images are in public/screenshots/watch-0.3.0/. Each directory
+includes provenance notes. Historical CLI 0.10.0 assets remain unchanged.
+Run npm run check and npm run build before reviewing the generated dist/.
+This update does not deploy to Cloudflare.

@@ -8,7 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <h1>Frequently Asked Questions</h1>
 
     <h2>What is desktop-2fa?</h2>
-    <p>An offline TOTP authenticator with a Python CLI and an early Textual terminal UI prototype. TOTP secrets are stored in a local encrypted vault.</p>
+    <p>An offline TOTP authenticator with a Python CLI and an complete Textual terminal UI. TOTP secrets are stored in a local encrypted vault.</p>
 
     <h2>Does it sync to the cloud?</h2>
     <p>No. Vaults stay local. Backups and transfers are user-managed.</p>
@@ -17,7 +17,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>The default is <code>~/.desktop-2fa/vault</code>. Use <code>--vault PATH</code> or <code>DESKTOP_2FA_VAULT</code> to choose another path.</p>
 
     <h2>What interfaces are available?</h2>
-    <p>The CLI is the primary interface. <code>d2fa ui</code> is an early prototype that can list entries, generate codes, and copy codes; it cannot manage entries or create a missing vault.</p>
+    <p>Yes. Since 0.11.0, <code>d2fa ui</code> supports account creation, rename/removal, vault creation/unlocking, encrypted import/export/backup and password changes. Live codes include countdowns; the session locks after five minutes without input. The full CLI remains available.</p>
 
     <h2>Can I recover my password?</h2>
     <p>No. There is no reset or recovery key. Store the password securely and create a separate encrypted backup.</p>
@@ -29,7 +29,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>The CLI accepts <code>otpauth://</code> URLs with <code>d2fa add</code>. QR scanning is not listed as a current feature.</p>
 
     <h2>What is D2FA Watch?</h2>
-    <p>A separate Wear OS app in development. The current MVP can create a vault, add accounts manually and generate TOTP codes on the watch. Managing accounts on a computer and securely transferring selected ones without cloud sync is planned; the transfer workflow is still being designed. Desktop-2FA remains free and open source. Watch is planned as a separate paid app. See <a href="/#watch">the Watch development update</a>.</p>
+    <p>A standalone Wear OS authenticator in development. The 0.3.0 milestone adds guided account setup, password-only sessions, automatic locking and device/interoperability evidence. Selected-account desktop transfer is being designed and is not implemented. Desktop stays free and open source; Watch is planned as a separate paid app. See <a href="/#watch">the Watch development update</a>.</p>
 
     <h2>What Python version do I need?</h2>
     <p>Python 3.11 or newer.</p>

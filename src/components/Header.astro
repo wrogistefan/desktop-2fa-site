@@ -1,5 +1,7 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+interface Props { showcase?: boolean; }
+const { showcase = false } = Astro.props;
 ---
 
 <header class="hero" role="banner">
@@ -156,17 +158,18 @@ import ThemeToggle from './ThemeToggle.astro';
         stroke-dasharray="4 8"
       />
     </svg>
+    <p class="eyebrow release-eyebrow">Available now · Desktop-2FA 0.11.0</p>
 
     <h1 class="hero-title">desktop-2fa</h1>
-    <p class="hero-tagline">Own your vault. Generate your codes offline.</p>
+    <p class="hero-tagline">Your codes. Your vault. Now with a full terminal UI.</p>
     <p class="hero-subheading">
-      An offline TOTP authenticator with an encrypted local vault, a complete CLI,
-      and an early Textual terminal UI. No cloud sync.
+      Manage accounts, watch live countdowns and back up your encrypted vault
+      in Textual. The full CLI is still there. Everything stays local.
     </p>
 
     <nav class="hero-actions" aria-label="Primary actions">
-      <a href="/#install" class="btn btn-primary">Install</a>
-      <a href="/#screenshots" class="btn btn-secondary">Screenshots</a>
+      <a href="/#install" class="btn btn-primary">Get 0.11.0</a>
+      <a href="/#terminal-ui" class="btn btn-secondary">Explore the UI</a>
       <a href="/#watch" class="btn btn-secondary">D2FA Watch</a>
       <a href="/docs/" class="btn btn-secondary">Documentation</a>
       <a
@@ -180,9 +183,15 @@ import ThemeToggle from './ThemeToggle.astro';
     <div class="install-snippet" aria-label="Installation command">
       <code>pip install desktop-2fa</code>
     </div>
-    <p>Version 0.10.0 · Free &amp; open source ·
+    <p>Version 0.11.0 · Free &amp; open source ·
       <a href="https://pypi.org/project/desktop-2fa/">PyPI</a> ·
       <a href="https://github.com/wrogistefan/desktop-2fa/releases">Releases</a>
     </p>
+    {showcase && <>
+    <a class="hero-product" href="/#terminal-ui" aria-label="Explore the working Textual interface">
+      <img src="/screenshots/textual-ui/03-accounts.png" alt="Desktop-2FA terminal dashboard with synthetic accounts, a live code and countdown" width="1360" height="978" fetchpriority="high" decoding="async" />
+    </a>
+    <p class="muted hero-caption">The real terminal interface · Synthetic demo accounts</p>
+    </>}
   </div>
 </header>

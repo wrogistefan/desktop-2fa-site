@@ -34,7 +34,7 @@ d2fa vault path</code></pre>
       <li><code>code</code> — generate a code; supports <code>--copy</code>, <code>--copy-only</code>, <code>--json</code>, <code>--raw</code>, and <code>--quiet</code>.</li>
       <li><code>vault init</code> (also available as <code>init-vault</code>), <code>vault unlock</code>, <code>vault change-password</code>, <code>vault path</code> — manage the vault.</li>
       <li><code>backup</code>, <code>export</code>, <code>import</code> — create and move encrypted vault copies.</li>
-      <li><code>ui</code> — launch the early Textual terminal UI prototype.</li>
+      <li><code>ui</code> — launch the complete Textual terminal interface.</li>
     </ul>
 
     <h2>Adding accounts and selecting entries</h2>
@@ -68,7 +68,11 @@ d2fa vault path</code></pre>
 
     <p>Password files contain exactly one UTF-8 line without a BOM. Only one optional final LF or CRLF is removed; spaces and tabs remain significant. Empty, multiline, bare-CR, BOM and invalid UTF-8 input is rejected. Older files relying on automatic trimming may need to be corrected to contain the actual password previously used.</p>
 
-    <h2>Textual UI status</h2>
-    <p><code>d2fa ui</code> is an early prototype. It can list vault entries, generate codes, and copy codes. It does not manage entries or create a missing vault. The CLI remains the primary interface.</p>
+    <h2 id="terminal-ui">Textual terminal UI</h2>
+    <p>Run <code>d2fa ui</code> to open the locked screen. Choose Unlock, Create vault or Import. To select another file, run <code>d2fa --vault ./my-vault ui</code>. A failed unlock never creates or replaces a vault.</p>
+    <p>Manage accounts through Add, Rename and Remove. Add accepts manual fields or a masked provisioning URI. Vault forms support encrypted D2FA import/export, backup and password changes. Import replaces the destination; it does not merge accounts.</p>
+    <p>Codes refresh each account’s period with a countdown and validity bar. Copy and Copy only are explicit actions. Writes, backup and export authenticate again, with explicit confirmation for overwrites and removal.</p>
+    <ul><li>Ctrl+N: add an account; Ctrl+B: back up.</li><li>Ctrl+L: lock; Ctrl+Q: quit.</li><li>Tab/Shift+Tab and Enter: navigate; Escape: cancel a form.</li></ul>
+    <p>The UI also locks after five minutes without keyboard, mouse or paste input. It retains decrypted data while unlocked; releasing the session does not guarantee secure memory erasure. File operations run in workers to keep the interface responsive.</p>
   </div>
 </BaseLayout>

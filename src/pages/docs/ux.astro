@@ -7,21 +7,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <a href="/docs" class="back-link">← Back to documentation</a>
 
     <h1>Application Behavior</h1>
-    <p>This page summarizes the current CLI and early Textual UI behavior. For complete command options, see the <a href="/docs/cli">CLI reference</a>.</p>
+    <p>This page summarizes the current CLI and complete Textual UI behavior. For complete command options, see the <a href="/docs/cli">CLI reference</a>.</p>
 
     <h2>Vault selection</h2>
     <p>Commands use <code>~/.desktop-2fa/vault</code> by default. Choose a different file with the global <code>--vault</code> option or set <code>DESKTOP_2FA_VAULT</code>. The command-line option takes precedence.</p>
 
     <h2>Vault creation</h2>
-    <p>Only <code>vault init</code>, <code>list</code> and <code>add</code> create a missing vault. Other content commands report a missing-vault error; a failed load never triggers creation. In non-interactive use, supply <code>--password</code> or <code>--password-file</code>.</p>
-    <p>The <code>d2fa ui</code> prototype does not create missing vaults.</p>
+    <p>In the CLI, only <code>vault init</code>, <code>list</code> and <code>add</code> create a missing vault. Other content commands report a missing-vault error; a failed load never triggers creation. In non-interactive use, supply <code>--password</code> or <code>--password-file</code>.</p>
+    <p><code>d2fa ui</code> opens locked without supplied credentials. Its Create vault form explicitly creates a vault; a failed load never does. Import accepts an encrypted D2FA file and replaces the destination after confirmation.</p>
 
     <h2>Authentication and passwords</h2>
-    <p>Commands that access vault contents require a password. Weak passwords are evaluated with zxcvbn and can be warned about or rejected through configuration. Password changes are managed with <code>d2fa vault change-password</code>.</p>
+    <p>CLI commands that access vault contents authenticate separately; UI sessions retain decrypted data until locking or exit. Weak passwords are evaluated with zxcvbn and can be warned about or rejected through configuration. Password changes are managed with <code>d2fa vault change-password</code>.</p>
 
     <h2>Entry selection and terminal UI</h2>
     <p>Code, remove and rename use case-sensitive exact account names before a unique issuer fallback. Ambiguous matches fail with status 6. Rename refuses an occupied destination; <code>list --indices</code> and <code>rename OLD NEW --index N</code> support explicit repair of legacy duplicates.</p>
-    <p>Textual shows validity using the selected account's actual period. Expired codes are cleared, changing selection clears the previous result, and copied-code feedback shows the current value and remaining validity. Entry management remains in the CLI.</p>
+    <p>Textual refreshes selected codes automatically at period boundaries and shows an entry-specific countdown and validity bar. Search, Add, Rename and Remove support everyday management. Copy is explicit; Copy only hides the displayed code. Ctrl+L or five minutes without input locks the session. Writes, backup and export ask for the password again.</p>
     <h2>Errors and state changes</h2>
     <p>The CLI distinguishes missing vaults from filesystem permission failures, validates vault files before loading, and uses atomic replacement for saves. Check the command output and exit status before assuming an operation succeeded.</p>
 
